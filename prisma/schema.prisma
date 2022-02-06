@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+    id              Int                 @id @default(autoincrement())
+    email           String              @unique
+    firstName       String
+    lastName        String
+    password        String
+    admin           Boolean             @default(false)
+    superAdmin      Boolean             @default(false)
+    posts           Post[]
+    postsLiked      LikesOnPosts[]
+    comments        Comment[]
+    commentsLiked   LikesOnComments[]
+}
+
+model Post {
+    id          Int             @id @default(autoincrement())
+    createdAt   DateTime        @default(now())
+    updatedAt   DateTime        @updatedAt
+    text        String          @db.VarChar(255)
+    author      User            @relation(fields: [authorId], references: [id])
+    authorId    Int
+    likes       LikesOnPosts[]
+    comments    Comment[]
+}
+
+model Comment {
+    id          Int                 @id @default(autoincrement())
+    createdAt   DateTime            @default(now())
+    updatedAt   DateTime            @updatedAt
+    text        String
+    author      User                @relation(fields: [authorId], references: [id])
+    authorId    Int
+    post        Post                @relation(fields: [postId], references: [id])
+    postId      Int
+    likes       LikesOnComments[]
+}
+
+model LikesOnPosts {
+    user    User @relation(fields: [userId], references: [id])
+    userId  Int
+    post    Post @relation(fields: [postId], references: [id])
+    postId  Int
+
+    @@id([userId, postId])
+}
+
+model LikesOnComments {
+    user        User    @relation(fields: [userId], references: [id])
+    userId      Int
+    comment     Comment @relation(fields: [commentId], references: [id])
+    commentId   Int
+
+    @@id([userId, commentId])
+}
