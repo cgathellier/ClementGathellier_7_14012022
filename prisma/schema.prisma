@@ -30,9 +30,11 @@ model Post {
     updatedAt   DateTime        @updatedAt
     text        String          @db.VarChar(255)
     author      User            @relation(fields: [authorId], references: [id])
-    authorId    Int
+    authorId    Int             
     likes       LikesOnPosts[]
     comments    Comment[]
+
+    @@unique(fields: [id, authorId], name: "postIdAuthorId")
 }
 
 model Comment {

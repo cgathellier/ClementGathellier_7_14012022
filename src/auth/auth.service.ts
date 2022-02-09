@@ -16,15 +16,15 @@ import { JwtPayload } from './jwt-token.interface';
 export class AuthService {
   constructor(private prisma: PrismaService, private jwtService: JwtService) {}
 
-  user(usersInputs: SignUpDto) {
-    const { email, firstName, lastName, password } = usersInputs;
-    return Prisma.validator<Prisma.UserCreateInput>()({
-      email,
-      firstName,
-      lastName,
-      password,
-    });
-  }
+  //   user(usersInputs: SignUpDto) {
+  //     const { email, firstName, lastName, password } = usersInputs;
+  //     return Prisma.validator<Prisma.UserCreateInput>()({
+  //       email,
+  //       firstName,
+  //       lastName,
+  //       password,
+  //     });
+  //   }
 
   async getAllUsers(): Promise<User[]> {
     const users = await this.prisma.user.findMany();
