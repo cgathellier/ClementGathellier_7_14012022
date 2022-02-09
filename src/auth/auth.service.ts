@@ -80,7 +80,9 @@ export class AuthService {
     const user = await this.prisma.user.findUnique({ where: { email } });
 
     if (!user) {
-      //   throw new
+      throw new UnauthorizedException(
+        'Aucun compte ne correspond à ces identifiants.',
+      );
     } else {
       if (user && (await bcrypt.compare(password, user.password))) {
         const { id, email } = user;
