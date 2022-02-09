@@ -5,13 +5,11 @@ export const prisma = new PrismaClient();
 async function main() {
   await prisma.user.create({
     data: {
-      firstName: 'Alice',
-      lastName: 'Tagliatelle',
-      email: 'alice@prisma.io',
-      password: 'test',
-      posts: {
-        create: { text: 'Hello World' },
-      },
+      firstName: 'Admin',
+      lastName: 'Groupomania',
+      email: 'admin@groupomania.com',
+      password: 'admin123',
+      admin: true,
     },
   });
 
