@@ -14,10 +14,14 @@ export class SignUpDto {
   password: string;
 }
 
-export class SignInDto {
+export class LoginDto {
   @IsNotEmpty()
   email: string;
 
   @IsNotEmpty()
   password: string;
+}
+
+export class CreateAdminDto extends SignUpDto {
+  admin: boolean;
 }
