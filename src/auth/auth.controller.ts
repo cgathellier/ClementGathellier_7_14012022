@@ -8,7 +8,7 @@ export class AuthController {
   constructor(private authService: AuthService) {}
 
   @Post('/signup')
-  signUp(@Body() signUpInputs: SignUpDto): Promise<User> {
+  signUp(@Body() signUpInputs: SignUpDto): Promise<{ accessToken: string }> {
     return this.authService.signUp(signUpInputs);
   }
 
@@ -18,7 +18,7 @@ export class AuthController {
   }
 
   @Post('/createAdmin')
-  createAdmin(): Promise<User> {
+  createAdmin(): Promise<{ accessToken: string }> {
     const adminObj = {
       firstName: 'Admin',
       lastName: 'Groupomania',

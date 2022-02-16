@@ -15,7 +15,14 @@ import { JwtPayload } from './jwt-token.interface';
 export class AuthService {
   constructor(private prisma: PrismaService, private jwtService: JwtService) {}
 
-  async signUp(signUpInputs: SignUpDto): Promise<User> {
+  generateToken = (id: number, email: string): { accessToken: string } => {
+    const payload: JwtPayload = { id, email };
+    const accessToken: string = this.jwtService.sign(payload);
+
+    return { accessToken };
+  };
+
+  async signUp(signUpInputs: SignUpDto): Promise<{ accessToken: string }> {
     try {
       const { password } = signUpInputs;
 
@@ -27,7 +34,7 @@ export class AuthService {
       const user = await this.prisma.user.create({
         data: signUpInputs,
       });
-      return user;
+      return this.generateToken(user.id, user.email);
     } catch (error) {
       if (error.code === 'P2002') {
         throw new ConflictException(
@@ -50,12 +57,7 @@ export class AuthService {
       );
     } else {
       if (user && (await bcrypt.compare(password, user.password))) {
-        const { id, email } = user;
-
-        const payload: JwtPayload = { id, email };
-        const accessToken: string = this.jwtService.sign(payload);
-
-        return { accessToken };
+        return this.generateToken(user.id, user.email);
       } else {
         throw new UnauthorizedException(
           'Aucun compte ne correspond à ces identifiants.',
@@ -64,7 +66,9 @@ export class AuthService {
     }
   }
 
-  async createAdmin(createAdminDto: CreateAdminDto): Promise<User> {
+  async createAdmin(
+    createAdminDto: CreateAdminDto,
+  ): Promise<{ accessToken: string }> {
     try {
       const { password } = createAdminDto;
 
@@ -76,7 +80,7 @@ export class AuthService {
       const user = await this.prisma.user.create({
         data: createAdminDto,
       });
-      return user;
+      return this.generateToken(user.id, user.email);
     } catch (error) {
       if (error.code === 'P2002') {
         throw new ConflictException(
