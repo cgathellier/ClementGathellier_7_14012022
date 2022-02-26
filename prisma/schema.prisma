@@ -28,7 +28,7 @@ model Post {
     id          Int             @id @default(autoincrement())
     createdAt   DateTime        @default(now())
     updatedAt   DateTime        @updatedAt
-    text        String          @db.VarChar(255)
+    text        String          @db.Text
     author      User            @relation(fields: [authorId], references: [id])
     authorId    Int             
     likes       LikesOnPosts[]
@@ -41,7 +41,7 @@ model Comment {
     id          Int                 @id @default(autoincrement())
     createdAt   DateTime            @default(now())
     updatedAt   DateTime            @updatedAt
-    text        String
+    text        String              @db.Text
     author      User                @relation(fields: [authorId], references: [id])
     authorId    Int
     post        Post                @relation(fields: [postId], references: [id])
