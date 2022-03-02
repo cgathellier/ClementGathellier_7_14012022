@@ -29,4 +29,13 @@ export class UsersService {
       return user;
     }
   }
+
+  checkToken(user: User): {
+    id: number;
+    email: string;
+    isAdmin: boolean;
+  } {
+    const { id, email, admin } = user;
+    return { id, email, isAdmin: admin };
+  }
 }
