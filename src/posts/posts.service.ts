@@ -62,15 +62,22 @@ export class PostsService {
 
   async deletePost(id: number, user: User): Promise<Post> {
     try {
-      const { id: authorId } = user;
-      const deletedPost = await this.prisma.post.delete({
-        where: {
-          postIdAuthorId: {
-            id,
-            authorId,
+      const { id: authorId, admin } = user;
+      let deletedPost: Post;
+      if (admin) {
+        deletedPost = await this.prisma.post.delete({
+          where: { id },
+        });
+      } else {
+        deletedPost = await this.prisma.post.delete({
+          where: {
+            postIdAuthorId: {
+              id,
+              authorId,
+            },
           },
-        },
-      });
+        });
+      }
 
       return deletedPost;
     } catch (error) {
