@@ -86,9 +86,40 @@ export class PostsService {
     }
   }
 
+  async likePost(id: number, user: User): Promise<void> {
+    try {
+      const { id: userId } = user;
+
+      const likesOnPosts = await this.prisma.likesOnPosts.findFirst({
+        where: {
+          userId,
+          postId: id,
+        },
+      });
+
+      if (likesOnPosts) {
+        await this.prisma.likesOnPosts.deleteMany({
+          where: {
+            userId,
+            postId: id,
+          },
+        });
+      } else {
+        await this.prisma.likesOnPosts.createMany({
+          data: {
+            userId,
+            postId: id,
+          },
+        });
+      }
+    } catch (error) {
+      throw new InternalServerErrorException(error);
+    }
+  }
+
   async deletePost(id: number, user: User): Promise<Post> {
     try {
-      const { id: authorId, admin } = user;
+      const { id: userId, admin } = user;
       let deletedPost: Post;
       if (admin) {
         deletedPost = await this.prisma.post.delete({
@@ -99,7 +130,7 @@ export class PostsService {
           where: {
             postIdAuthorId: {
               id,
-              authorId,
+              authorId: userId,
             },
           },
         });

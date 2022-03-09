@@ -40,6 +40,11 @@ export class PostsController {
     return this.postsService.updatePost(+id, updatePostDto, user);
   }
 
+  @Patch('/likes/:id')
+  likePost(@Param('id') id: string, @GetUser() user: User): Promise<void> {
+    return this.postsService.likePost(+id, user);
+  }
+
   @Delete('/:id')
   deletePost(
     @Param('id') id: string,
