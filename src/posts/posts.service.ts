@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { Post, Prisma, User } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { CreatePostDto } from './postsDto';
+import { CreatePostDto, UpdatePostDto } from './postsDto';
 
 @Injectable()
 export class PostsService {
@@ -51,6 +51,32 @@ export class PostsService {
         data: {
           text,
           authorId: id,
+        },
+      });
+
+      return post;
+    } catch (error) {
+      throw new InternalServerErrorException(error);
+    }
+  }
+
+  async updatePost(
+    id: number,
+    updatePostDto: UpdatePostDto,
+    user: User,
+  ): Promise<Post> {
+    try {
+      const { text } = updatePostDto;
+      const { id: authorId } = user;
+      const post = await this.prisma.post.update({
+        where: {
+          postIdAuthorId: {
+            id,
+            authorId,
+          },
+        },
+        data: {
+          text,
         },
       });
 
