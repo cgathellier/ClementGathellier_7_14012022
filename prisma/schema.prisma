@@ -29,7 +29,7 @@ model Post {
     createdAt   DateTime        @default(now())
     updatedAt   DateTime        @updatedAt
     text        String          @db.Text
-    author      User            @relation(fields: [authorId], references: [id])
+    author      User            @relation(fields: [authorId], references: [id], onDelete: Cascade)
     authorId    Int             
     likes       LikesOnPosts[]
     comments    Comment[]
@@ -42,9 +42,9 @@ model Comment {
     createdAt   DateTime            @default(now())
     updatedAt   DateTime            @updatedAt
     text        String              @db.Text
-    author      User                @relation(fields: [authorId], references: [id])
-    authorId    Int
-    post        Post                @relation(fields: [postId], references: [id])
+    author      User?               @relation(fields: [authorId], references: [id], onDelete: SetNull)
+    authorId    Int?
+    post        Post                @relation(fields: [postId], references: [id], onDelete: Cascade)
     postId      Int
     likes       LikesOnComments[]
 
@@ -52,18 +52,18 @@ model Comment {
 }
 
 model LikesOnPosts {
-    user    User @relation(fields: [userId], references: [id])
+    user    User @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId  Int
-    post    Post @relation(fields: [postId], references: [id])
+    post    Post @relation(fields: [postId], references: [id], onDelete: Cascade)
     postId  Int
 
     @@id([userId, postId])
 }
 
 model LikesOnComments {
-    user        User    @relation(fields: [userId], references: [id])
+    user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId      Int
-    comment     Comment @relation(fields: [commentId], references: [id])
+    comment     Comment @relation(fields: [commentId], references: [id], onDelete: Cascade)
     commentId   Int
 
     @@id([userId, commentId])
