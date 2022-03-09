@@ -17,7 +17,6 @@ model User {
     lastName        String
     password        String
     admin           Boolean             @default(false)
-    superAdmin      Boolean             @default(false)
     posts           Post[]
     postsLiked      LikesOnPosts[]
     comments        Comment[]
