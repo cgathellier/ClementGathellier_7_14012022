@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Param,
+  Patch,
   Post,
   UseGuards,
 } from '@nestjs/common';
@@ -24,6 +25,11 @@ export class CommentsController {
     @GetUser() user: User,
   ): Promise<Comment> {
     return this.commentsService.createComment(createCommentDto, user, +postId);
+  }
+
+  @Patch('/likes/:id')
+  likeComment(@Param('id') id: string, @GetUser() user: User): Promise<void> {
+    return this.commentsService.likeComment(+id, user);
   }
 
   @Delete('/:commentId')

@@ -29,6 +29,37 @@ export class CommentsService {
     }
   }
 
+  async likeComment(id: number, user: User): Promise<void> {
+    try {
+      const { id: userId } = user;
+
+      const likesOnComments = await this.prisma.likesOnComments.findFirst({
+        where: {
+          userId,
+          commentId: id,
+        },
+      });
+
+      if (likesOnComments) {
+        await this.prisma.likesOnComments.deleteMany({
+          where: {
+            userId,
+            commentId: id,
+          },
+        });
+      } else {
+        await this.prisma.likesOnComments.createMany({
+          data: {
+            userId,
+            commentId: id,
+          },
+        });
+      }
+    } catch (error) {
+      throw new InternalServerErrorException(error);
+    }
+  }
+
   async deleteComment(id: number, user: User): Promise<Comment> {
     try {
       const { id: authorId, admin } = user;

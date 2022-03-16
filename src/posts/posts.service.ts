@@ -30,6 +30,7 @@ export class PostsService {
                 lastName: true,
               },
             },
+            likes: {},
           },
         },
         likes: {},
