@@ -4,3 +4,8 @@ export class CreateCommentDto {
   @IsNotEmpty()
   text: string;
 }
+
+export class UpdateCommentDto {
+  @IsNotEmpty()
+  text: string;
+}

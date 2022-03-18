@@ -11,7 +11,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { Comment, User } from '@prisma/client';
 import { GetUser } from 'src/auth/get-user.decorator';
 import { CommentsService } from './comments.service';
-import { CreateCommentDto } from './commentsDto';
+import { CreateCommentDto, UpdateCommentDto } from './commentsDto';
 
 @Controller('comments')
 @UseGuards(AuthGuard())
@@ -25,6 +25,15 @@ export class CommentsController {
     @GetUser() user: User,
   ): Promise<Comment> {
     return this.commentsService.createComment(createCommentDto, user, +postId);
+  }
+
+  @Patch('/:id')
+  updatePost(
+    @Param('id') id: string,
+    @Body() updateCommentDto: UpdateCommentDto,
+    @GetUser() user: User,
+  ): Promise<Comment> {
+    return this.commentsService.updatePost(+id, updateCommentDto, user);
   }
 
   @Patch('/likes/:id')

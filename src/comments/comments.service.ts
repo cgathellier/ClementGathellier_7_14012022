@@ -1,7 +1,7 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { Comment, User } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { CreateCommentDto } from './commentsDto';
+import { CreateCommentDto, UpdateCommentDto } from './commentsDto';
 
 @Injectable()
 export class CommentsService {
@@ -20,6 +20,32 @@ export class CommentsService {
           text,
           authorId,
           postId,
+        },
+      });
+
+      return comment;
+    } catch (error) {
+      throw new InternalServerErrorException(error);
+    }
+  }
+
+  async updatePost(
+    id: number,
+    updateCommentDto: UpdateCommentDto,
+    user: User,
+  ): Promise<Comment> {
+    try {
+      const { text } = updateCommentDto;
+      const { id: authorId } = user;
+      const comment = await this.prisma.comment.update({
+        where: {
+          commentIdAuthorId: {
+            id,
+            authorId,
+          },
+        },
+        data: {
+          text,
         },
       });
 
