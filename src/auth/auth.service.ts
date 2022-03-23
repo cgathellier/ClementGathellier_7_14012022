@@ -4,7 +4,6 @@ import {
   InternalServerErrorException,
   UnauthorizedException,
 } from '@nestjs/common';
-import { User } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateAdminDto, LoginDto, SignUpDto } from './authDto';
 import * as bcrypt from 'bcrypt';
@@ -22,14 +21,17 @@ export class AuthService {
     return { accessToken };
   };
 
+  async hashPassword(plainPassword: string): Promise<string> {
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(plainPassword, salt);
+    return hashedPassword;
+  }
+
   async signUp(signUpInputs: SignUpDto): Promise<{ accessToken: string }> {
     try {
       const { password } = signUpInputs;
 
-      const salt = await bcrypt.genSalt(10);
-      const hashedPassword = await bcrypt.hash(password, salt);
-
-      signUpInputs.password = hashedPassword;
+      signUpInputs.password = await this.hashPassword(password);
 
       const user = await this.prisma.user.create({
         data: signUpInputs,

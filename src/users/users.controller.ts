@@ -1,7 +1,20 @@
-import { Controller, Get, Param, UseGuards, Post } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  UseGuards,
+  Post,
+  Patch,
+  Body,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { User } from '@prisma/client';
 import { GetUser } from 'src/auth/get-user.decorator';
+import {
+  UpdateUserInfosDto,
+  UpdateUserPasswordDto,
+  UserContext,
+} from './usersDto';
 import { UsersService } from './users.service';
 
 @Controller('users')
@@ -20,11 +33,23 @@ export class UsersController {
   }
 
   @Post('/checkToken')
-  checkToken(@GetUser() user: User): {
-    id: number;
-    email: string;
-    isAdmin: boolean;
-  } {
-    return this.usersService.checkToken(user);
+  checkToken(@GetUser() user: User): UserContext {
+    return this.usersService.getUserContext(user);
+  }
+
+  @Patch('/infos')
+  updateUserInfos(
+    @GetUser() user: User,
+    @Body() userInfos: UpdateUserInfosDto,
+  ): Promise<[{ accessToken: string }, UserContext]> {
+    return this.usersService.updateUserInfos(user, userInfos);
+  }
+
+  @Patch('/password')
+  updateUserPassword(
+    @GetUser() user: User,
+    @Body() userInfos: UpdateUserPasswordDto,
+  ): Promise<void> {
+    return this.usersService.updateUserPassword(user, userInfos);
   }
 }
