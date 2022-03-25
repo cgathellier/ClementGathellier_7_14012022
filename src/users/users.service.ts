@@ -35,6 +35,32 @@ export class UsersService {
       where: {
         id,
       },
+      include: {
+        posts: {
+          include: {
+            author: {
+              select: {
+                id: true,
+                firstName: true,
+                lastName: true,
+              },
+            },
+            comments: {
+              include: {
+                author: {
+                  select: {
+                    id: true,
+                    firstName: true,
+                    lastName: true,
+                  },
+                },
+                likes: {},
+              },
+            },
+            likes: {},
+          },
+        },
+      },
     });
 
     if (!user) {
