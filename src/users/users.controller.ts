@@ -14,6 +14,7 @@ import {
   UpdateUserInfosDto,
   UpdateUserPasswordDto,
   UserContext,
+  GetUserByIdReturnObj,
 } from './usersDto';
 import { UsersService } from './users.service';
 
@@ -28,7 +29,7 @@ export class UsersController {
   }
 
   @Get('/:id')
-  getUserById(@Param('id') id: string): Promise<User> {
+  getUserById(@Param('id') id: string): Promise<GetUserByIdReturnObj> {
     return this.usersService.getUserById(+id);
   }
 

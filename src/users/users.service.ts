@@ -10,6 +10,7 @@ import {
   UpdateUserInfosDto,
   UpdateUserPasswordDto,
   UserContext,
+  GetUserByIdReturnObj,
 } from './usersDto';
 import { AuthService } from 'src/auth/auth.service';
 
@@ -30,12 +31,15 @@ export class UsersService {
     }
   }
 
-  async getUserById(id: number): Promise<User> {
+  async getUserById(id: number): Promise<GetUserByIdReturnObj> {
     const user = await this.prisma.user.findUnique({
       where: {
         id,
       },
-      include: {
+      select: {
+        id: true,
+        firstName: true,
+        lastName: true,
         posts: {
           include: {
             author: {

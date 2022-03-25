@@ -1,4 +1,5 @@
 import { IsEmail } from 'class-validator';
+import { Post, Comment } from '@prisma/client';
 
 export class UserContext {
   id: number;
@@ -16,4 +17,11 @@ export class UpdateUserInfosDto {
 
 export class UpdateUserPasswordDto {
   password: string;
+}
+
+export class GetUserByIdReturnObj {
+  id: number;
+  firstName: string;
+  lastName: string;
+  posts: Post[];
 }
