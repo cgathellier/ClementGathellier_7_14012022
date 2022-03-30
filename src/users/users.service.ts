@@ -113,7 +113,7 @@ export class UsersService {
   async updateUserPassword(
     user: User,
     userInfos: UpdateUserPasswordDto,
-  ): Promise<void> {
+  ): Promise<{ accessToken: string }> {
     try {
       const { id } = user;
       const { password } = userInfos;
@@ -124,6 +124,7 @@ export class UsersService {
           password: hashedPassword,
         },
       });
+      return this.authService.generateToken(id, updatedUser.email);
     } catch (error) {
       throw new InternalServerErrorException(error);
     }

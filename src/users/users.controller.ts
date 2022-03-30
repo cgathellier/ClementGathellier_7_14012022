@@ -50,7 +50,7 @@ export class UsersController {
   updateUserPassword(
     @GetUser() user: User,
     @Body() userInfos: UpdateUserPasswordDto,
-  ): Promise<void> {
+  ): Promise<{ accessToken: string }> {
     return this.usersService.updateUserPassword(user, userInfos);
   }
 }
