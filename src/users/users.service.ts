@@ -75,8 +75,8 @@ export class UsersService {
   }
 
   getUserContext(user: User): UserContext {
-    const { id, email, admin } = user;
-    return { id, email, isAdmin: admin };
+    const { id, email, firstName, lastName, admin } = user;
+    return { id, email, firstName, lastName, isAdmin: admin };
   }
 
   async updateUserInfos(

@@ -4,6 +4,8 @@ import { Post, Comment } from '@prisma/client';
 export class UserContext {
   id: number;
   email: string;
+  firstName: string;
+  lastName: string;
   isAdmin: boolean;
 }
 
