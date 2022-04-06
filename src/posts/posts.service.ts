@@ -13,6 +13,7 @@ export class PostsService {
 
   async getAllPosts(): Promise<Post[]> {
     const posts = await this.prisma.post.findMany({
+      orderBy: { createdAt: 'desc' },
       include: {
         author: {
           select: {
@@ -22,6 +23,7 @@ export class PostsService {
           },
         },
         comments: {
+          orderBy: { createdAt: 'asc' },
           include: {
             author: {
               select: {

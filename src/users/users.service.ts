@@ -41,6 +41,7 @@ export class UsersService {
         firstName: true,
         lastName: true,
         posts: {
+          orderBy: { createdAt: 'desc' },
           include: {
             author: {
               select: {
@@ -50,6 +51,7 @@ export class UsersService {
               },
             },
             comments: {
+              orderBy: { createdAt: 'asc' },
               include: {
                 author: {
                   select: {
