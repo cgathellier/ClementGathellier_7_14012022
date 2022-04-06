@@ -6,6 +6,7 @@ import {
   Post,
   Patch,
   Body,
+  Delete,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { User } from '@prisma/client';
@@ -52,5 +53,10 @@ export class UsersController {
     @Body() userInfos: UpdateUserPasswordDto,
   ): Promise<{ accessToken: string }> {
     return this.usersService.updateUserPassword(user, userInfos);
+  }
+
+  @Delete()
+  deleteUser(@GetUser() user: User): Promise<void> {
+    return this.usersService.deleteUser(user);
   }
 }

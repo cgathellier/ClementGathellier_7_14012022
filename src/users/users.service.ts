@@ -129,4 +129,15 @@ export class UsersService {
       throw new InternalServerErrorException(error);
     }
   }
+
+  async deleteUser(user: User): Promise<void> {
+    try {
+      const { id } = user;
+      await this.prisma.user.delete({
+        where: { id },
+      });
+    } catch (error) {
+      throw new InternalServerErrorException(error);
+    }
+  }
 }
