@@ -1,5 +1,5 @@
-import { IsEmail } from 'class-validator';
-import { Post, Comment } from '@prisma/client';
+import { IsEmail, IsNotEmpty } from 'class-validator';
+import { Post } from '@prisma/client';
 
 export class UserContext {
   id: number;
@@ -13,11 +13,15 @@ export class UpdateUserInfosDto {
   @IsEmail()
   email: string;
 
+  @IsNotEmpty()
   firstName: string;
+
+  @IsNotEmpty()
   lastName: string;
 }
 
 export class UpdateUserPasswordDto {
+  @IsNotEmpty()
   password: string;
 }
 
