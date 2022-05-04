@@ -1,0 +1,78 @@
+.commentContainer {
+	display: flex;
+	flex-direction: column;
+	margin: 8px 0px;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	background-color: #f0f2f5;
+	padding: 8px 12px;
+	border-radius: 10px;
+	position: relative;
+}
+
+.header {
+	margin-bottom: 16px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.author {
+	font-weight: bold;
+	margin-bottom: 4px;
+	cursor: pointer;
+}
+
+.menuBtn {
+	padding-top: 0px !important;
+	padding-right: 0px !important;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.likeBtn {
+	width: fit-content;
+	margin-top: 4px;
+	padding: 0 12px;
+	font-size: 0.8em;
+	font-weight: bold;
+	color: #707070;
+	cursor: pointer;
+}
+
+.liked {
+	color: #1860d4;
+}
+
+.likes {
+	position: absolute;
+	bottom: 0px;
+	right: 16px;
+	transform: translateY(50%);
+	background-color: white;
+	padding: 1px;
+	padding-right: 6px;
+	border-radius: 30px;
+	box-shadow: 0px 1px 4px 1px rgba(0, 0, 0, 0.2);
+	display: flex;
+	align-items: center;
+}
+
+.likeIconContainer {
+	width: 16px;
+	height: 16px;
+	margin-right: 4px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #1860d4;
+	border-radius: 50%;
+	color: white;
+}
+
+.likesCount {
+	font-size: 0.9em;
+	color: #707070;
+}

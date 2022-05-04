@@ -1,0 +1,9 @@
+.buttonsContainer {
+	margin: 20px 0px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.updateButtons {
+	width: 48%;
+}

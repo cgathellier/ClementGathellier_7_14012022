@@ -1,0 +1,12 @@
+.title {
+	text-align: center;
+}
+
+.buttonContainer {
+	width: 100%;
+	padding: 0px 24px 24px !important;
+}
+
+.button {
+	width: 100%;
+}
