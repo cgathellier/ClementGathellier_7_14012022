@@ -1,56 +1,56 @@
 .frame {
-	width: 100vw;
-	height: calc(100vh - 80px);
+    width: 100vw;
+    height: calc(100vh - 80px);
 }
 
 .container {
-	width: 100%;
-	height: 100%;
-	padding: 32px 16px;
+    width: 100%;
+    height: 100%;
+    padding: 32px 16px;
 }
 
 .title {
-	display: flex;
-	justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
 .form {
-	display: flex;
-	flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .submitBtn {
-	margin-top: 16px;
+    margin-top: 16px;
 }
 
 .linkContainer {
-	margin-top: 16px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .link {
-	margin-left: 8px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	text-decoration: none;
+    margin-left: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
 }
 
 .link:visited {
-	color: black;
+    color: black;
 }
 
 @media screen and (min-width: 600px) {
-	.frame {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-	.container {
-		width: 500px;
-		height: fit-content;
-	}
+    .frame {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .container {
+        width: 500px;
+        height: fit-content;
+    }
 }

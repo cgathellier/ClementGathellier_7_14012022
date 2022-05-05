@@ -1,5 +1,5 @@
 export interface LoginFormValues {
-	email: string;
-	password: string;
-	submit?: undefined;
+    email: string;
+    password: string;
+    submit?: undefined;
 }

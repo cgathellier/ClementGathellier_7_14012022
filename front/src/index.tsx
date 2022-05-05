@@ -13,22 +13,22 @@ import { AlertsContextProvider } from './contexts/AlertsContext';
 import Profile from './components/profile/Profile';
 
 ReactDOM.render(
-	<UserContextProvider>
-		<AlertsContextProvider>
-			<BrowserRouter>
-				<Routes>
-					<Route path='/' element={<App />}>
-						<Route path='login' element={<LoginForm />} />
-						<Route path='signup' element={<SignupForm />} />
-						<Route path='feed' element={<Feed />} />
-						<Route path='profile/:userId' element={<Profile />} />
-						<Route path='*' element={<Feed />} />
-					</Route>
-				</Routes>
-			</BrowserRouter>
-		</AlertsContextProvider>
-	</UserContextProvider>,
-	document.getElementById('root')
+    <UserContextProvider>
+        <AlertsContextProvider>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<App />}>
+                        <Route path="login" element={<LoginForm />} />
+                        <Route path="signup" element={<SignupForm />} />
+                        <Route path="feed" element={<Feed />} />
+                        <Route path="profile/:userId" element={<Profile />} />
+                        <Route path="*" element={<Feed />} />
+                    </Route>
+                </Routes>
+            </BrowserRouter>
+        </AlertsContextProvider>
+    </UserContextProvider>,
+    document.getElementById('root'),
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -1,12 +1,12 @@
 import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Patch,
-  Post,
-  UseGuards,
+    Body,
+    Controller,
+    Delete,
+    Get,
+    Param,
+    Patch,
+    Post,
+    UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { PostsService } from './posts.service';
@@ -16,40 +16,40 @@ import { GetUser } from 'src/auth/get-user.decorator';
 @Controller('posts')
 @UseGuards(AuthGuard())
 export class PostsController {
-  constructor(private postsService: PostsService) {}
+    constructor(private postsService: PostsService) {}
 
-  @Get()
-  getAllPosts(): Promise<PostSchema[]> {
-    return this.postsService.getAllPosts();
-  }
+    @Get()
+    getAllPosts(): Promise<PostSchema[]> {
+        return this.postsService.getAllPosts();
+    }
 
-  @Post()
-  createPost(
-    @Body() createPostDto: CreatePostDto,
-    @GetUser() user: User,
-  ): Promise<PostSchema> {
-    return this.postsService.createPost(createPostDto, user);
-  }
+    @Post()
+    createPost(
+        @Body() createPostDto: CreatePostDto,
+        @GetUser() user: User,
+    ): Promise<PostSchema> {
+        return this.postsService.createPost(createPostDto, user);
+    }
 
-  @Patch('/:id')
-  updatePost(
-    @Param('id') id: string,
-    @Body() updatePostDto: UpdatePostDto,
-    @GetUser() user: User,
-  ): Promise<PostSchema> {
-    return this.postsService.updatePost(+id, updatePostDto, user);
-  }
+    @Patch('/:id')
+    updatePost(
+        @Param('id') id: string,
+        @Body() updatePostDto: UpdatePostDto,
+        @GetUser() user: User,
+    ): Promise<PostSchema> {
+        return this.postsService.updatePost(+id, updatePostDto, user);
+    }
 
-  @Patch('/likes/:id')
-  likePost(@Param('id') id: string, @GetUser() user: User): Promise<void> {
-    return this.postsService.likePost(+id, user);
-  }
+    @Patch('/likes/:id')
+    likePost(@Param('id') id: string, @GetUser() user: User): Promise<void> {
+        return this.postsService.likePost(+id, user);
+    }
 
-  @Delete('/:id')
-  deletePost(
-    @Param('id') id: string,
-    @GetUser() user: User,
-  ): Promise<PostSchema> {
-    return this.postsService.deletePost(+id, user);
-  }
+    @Delete('/:id')
+    deletePost(
+        @Param('id') id: string,
+        @GetUser() user: User,
+    ): Promise<PostSchema> {
+        return this.postsService.deletePost(+id, user);
+    }
 }

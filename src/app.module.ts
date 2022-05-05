@@ -6,7 +6,7 @@ import { CommentsModule } from './comments/comments.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
-  imports: [AuthModule, PostsModule, CommentsModule, UsersModule],
-  providers: [PrismaService],
+    imports: [AuthModule, PostsModule, CommentsModule, UsersModule],
+    providers: [PrismaService],
 })
 export class AppModule {}

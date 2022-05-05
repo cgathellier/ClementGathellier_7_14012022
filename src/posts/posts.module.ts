@@ -5,8 +5,8 @@ import { PostsController } from './posts.controller';
 import { PostsService } from './posts.service';
 
 @Module({
-  imports: [AuthModule],
-  controllers: [PostsController],
-  providers: [PostsService, PrismaService],
+    imports: [AuthModule],
+    controllers: [PostsController],
+    providers: [PostsService, PrismaService],
 })
 export class PostsModule {}

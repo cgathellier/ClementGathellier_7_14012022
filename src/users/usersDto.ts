@@ -2,32 +2,32 @@ import { IsEmail, IsNotEmpty } from 'class-validator';
 import { Post } from '@prisma/client';
 
 export class UserContext {
-  id: number;
-  email: string;
-  firstName: string;
-  lastName: string;
-  isAdmin: boolean;
+    id: number;
+    email: string;
+    firstName: string;
+    lastName: string;
+    isAdmin: boolean;
 }
 
 export class UpdateUserInfosDto {
-  @IsEmail()
-  email: string;
+    @IsEmail()
+    email: string;
 
-  @IsNotEmpty()
-  firstName: string;
+    @IsNotEmpty()
+    firstName: string;
 
-  @IsNotEmpty()
-  lastName: string;
+    @IsNotEmpty()
+    lastName: string;
 }
 
 export class UpdateUserPasswordDto {
-  @IsNotEmpty()
-  password: string;
+    @IsNotEmpty()
+    password: string;
 }
 
 export class GetUserByIdReturnObj {
-  id: number;
-  firstName: string;
-  lastName: string;
-  posts: Post[];
+    id: number;
+    firstName: string;
+    lastName: string;
+    posts: Post[];
 }
