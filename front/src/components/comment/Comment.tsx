@@ -151,6 +151,7 @@ const Comment = (props: CommentProps) => {
                                 <Button
                                     onClick={(e) => handleClick(e)}
                                     className={classes.menuBtn}
+                                    aria-label="Menu modifier/supprimer le commentaire"
                                 >
                                     <MoreHorizIcon />
                                 </Button>

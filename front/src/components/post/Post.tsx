@@ -212,6 +212,7 @@ const Post = (props: PostProps) => {
                                 <Button
                                     onClick={(e) => handleClick(e)}
                                     className={classes.menuBtn}
+                                    aria-label="Menu modifier/supprimer la publication"
                                 >
                                     <MoreHorizIcon />
                                 </Button>

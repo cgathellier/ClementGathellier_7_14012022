@@ -16,10 +16,10 @@
     height: 40px;
     width: 250px;
     padding: 0 20px;
-    border: solid 1px #dadde1 !important;
+    border: solid 1px #868686 !important;
     border-radius: 30px !important;
     font-size: 1em;
-    color: grey !important;
+    color: #091f43 !important;
 }
 
 .noPosts {

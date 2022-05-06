@@ -113,6 +113,7 @@ function App() {
                                             className={classes.accountIcon}
                                         />
                                     }
+                                    aria-label="Aller à mon profil"
                                 />
                                 <Button
                                     onClick={logout}
@@ -123,6 +124,7 @@ function App() {
                                             className={classes.logoutIcon}
                                         />
                                     }
+                                    aria-label="Se déconnecter"
                                 />
                             </>
                         )}

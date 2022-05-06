@@ -202,6 +202,7 @@ const Profile = () => {
                                         className={
                                             classes.closeEditMenuIconContainer
                                         }
+                                        aria-label="Fermer le menu"
                                     >
                                         <CloseIcon
                                             className={classes.closeIcon}
