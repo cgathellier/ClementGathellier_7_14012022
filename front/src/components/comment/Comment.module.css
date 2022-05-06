@@ -19,10 +19,42 @@
     justify-content: space-between;
 }
 
+.postInfosContainer {
+    width: 100%;
+}
+
 .author {
     font-weight: bold;
     margin-bottom: 4px;
     cursor: pointer;
+}
+
+.diffText {
+    cursor: pointer;
+    font-size: 0.8em;
+    position: relative;
+    width: fit-content;
+}
+
+.formattedDate {
+    width: fit-content !important;
+    padding: 8px;
+    font-size: 0.8em;
+    background-color: rgb(238, 238, 238);
+    position: absolute;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    width: 100%;
+}
+
+.diffText:hover {
+    text-decoration: underline;
+}
+
+.diffText:hover + .formattedDate {
+    opacity: 0.9;
+    transition: opacity 0.3s ease-in-out;
 }
 
 .menuBtn {

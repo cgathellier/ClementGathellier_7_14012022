@@ -4,6 +4,7 @@ import { CommentProps } from './types';
 import { UserContext } from '../../contexts/UserContext';
 import { useAlertsDispatcher } from '../../contexts/AlertsContext';
 import { instance as axios } from '../../axios.config';
+import getMomentDiff from '../../moment.utils';
 import classes from './Comment.module.css';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import Button from '@mui/material/Button';
@@ -26,6 +27,10 @@ const Comment = (props: CommentProps) => {
         null,
     );
     const [updatedText, setUpdatedText] = React.useState('');
+    const [dateTexts, setDateTexts] = React.useState({
+        diffText: '',
+        formattedDate: '',
+    });
 
     const menuOpen = Boolean(anchorEl);
     let hasUserLikedComment = false;
@@ -41,6 +46,20 @@ const Comment = (props: CommentProps) => {
     React.useEffect(() => {
         setUpdatedText(text);
     }, [text]);
+
+    React.useEffect(() => {
+        if (comment) {
+            const { diffText, formattedDate } = getMomentDiff(
+                comment.createdAt,
+            );
+            if (diffText && formattedDate) {
+                setDateTexts({
+                    diffText,
+                    formattedDate,
+                });
+            }
+        }
+    }, [comment]);
 
     const handleClick = (
         event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -134,16 +153,24 @@ const Comment = (props: CommentProps) => {
         <div className={classes.commentContainer}>
             <div className={classes.content}>
                 <div className={classes.header}>
-                    <span
-                        tabIndex={0}
-                        onKeyPress={handleKeyPressOnAuthor}
-                        onClick={goToProfile}
-                        className={classes.author}
-                    >
-                        {author
-                            ? `${author.firstName} ${author.lastName}`
-                            : 'Utilisateur supprimé'}
-                    </span>
+                    <div className={classes.commentInfosContainer}>
+                        <div
+                            tabIndex={0}
+                            onKeyPress={handleKeyPressOnAuthor}
+                            onClick={goToProfile}
+                            className={classes.author}
+                        >
+                            {author
+                                ? `${author.firstName} ${author.lastName}`
+                                : 'Utilisateur supprimé'}
+                        </div>
+                        <div className={classes.diffText}>
+                            {dateTexts.diffText}
+                        </div>
+                        <div className={classes.formattedDate}>
+                            {dateTexts.formattedDate}
+                        </div>
+                    </div>
                     {userContext &&
                         (userContext.isAdmin ||
                             (author && userContext.id === author.id)) && (

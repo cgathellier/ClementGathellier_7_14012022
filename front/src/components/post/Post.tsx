@@ -4,6 +4,7 @@ import { PostProps } from './types';
 import { UserContext } from '../../contexts/UserContext';
 import { useAlertsDispatcher } from '../../contexts/AlertsContext';
 import { instance as axios } from '../../axios.config';
+import getMomentDiff from '../../moment.utils';
 import classes from './Post.module.css';
 import Paper from '@mui/material/Paper';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
@@ -35,6 +36,10 @@ const Post = (props: PostProps) => {
     const [focusCommentInput, setFocusCommentInput] = React.useState(false);
     const [commentText, setCommentText] = React.useState('');
     const [canSubmit, setCanSubmit] = React.useState(false);
+    const [dateTexts, setDateTexts] = React.useState({
+        diffText: '',
+        formattedDate: '',
+    });
     const commentInputRef = React.useRef<HTMLInputElement>(null);
 
     const menuOpen = Boolean(anchorEl);
@@ -64,6 +69,18 @@ const Post = (props: PostProps) => {
             setCanSubmit(true);
         }
     }, [commentText]);
+
+    React.useEffect(() => {
+        if (post) {
+            const { diffText, formattedDate } = getMomentDiff(post.createdAt);
+            if (diffText && formattedDate) {
+                setDateTexts({
+                    diffText,
+                    formattedDate,
+                });
+            }
+        }
+    }, [post]);
 
     const handleClick = (
         event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -199,12 +216,20 @@ const Post = (props: PostProps) => {
         <div className={classes.postContainer}>
             <Paper elevation={0} className={classes.post}>
                 <div className={classes.header}>
-                    <div
-                        onClick={goToProfile}
-                        className={classes.author}
-                        onKeyPress={handleKeyPressOnAuthor}
-                        tabIndex={0}
-                    >{`${author.firstName} ${author.lastName}`}</div>
+                    <div className={classes.postInfosContainer}>
+                        <div
+                            onClick={goToProfile}
+                            className={classes.author}
+                            onKeyPress={handleKeyPressOnAuthor}
+                            tabIndex={0}
+                        >{`${author.firstName} ${author.lastName}`}</div>
+                        <div className={classes.diffText}>
+                            {dateTexts.diffText}
+                        </div>
+                        <div className={classes.formattedDate}>
+                            {dateTexts.formattedDate}
+                        </div>
+                    </div>
                     {userContext &&
                         (userContext.id === author.id ||
                             userContext.isAdmin) && (
