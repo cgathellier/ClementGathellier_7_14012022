@@ -29,11 +29,11 @@ function App() {
         navigate('/feed');
     };
 
-    const logout = () => {
+    const logout = React.useCallback(() => {
         setUserContext(null);
         localStorage.removeItem('gpmToken');
         navigate('/login');
-    };
+    }, [navigate, setUserContext]);
 
     React.useEffect(() => {
         const token = localStorage.getItem('gpmToken');
@@ -65,7 +65,14 @@ function App() {
         ) {
             checkToken();
         }
-    }, [userContext, setUserContext, navigate, setAlertsContext, location]);
+    }, [
+        userContext,
+        setUserContext,
+        navigate,
+        setAlertsContext,
+        location,
+        logout,
+    ]);
 
     return (
         <div className={classes.app}>

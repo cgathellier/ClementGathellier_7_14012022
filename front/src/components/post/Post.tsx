@@ -34,6 +34,7 @@ const Post = (props: PostProps) => {
     const [showComments, setShowComments] = React.useState(false);
     const [focusCommentInput, setFocusCommentInput] = React.useState(false);
     const [commentText, setCommentText] = React.useState('');
+    const [canSubmit, setCanSubmit] = React.useState(false);
     const commentInputRef = React.useRef<HTMLInputElement>(null);
 
     const menuOpen = Boolean(anchorEl);
@@ -55,6 +56,14 @@ const Post = (props: PostProps) => {
             commentInputRef.current.focus();
         }
     }, [focusCommentInput, commentInputRef]);
+
+    React.useEffect(() => {
+        if (commentText.trim() === '') {
+            setCanSubmit(false);
+        } else {
+            setCanSubmit(true);
+        }
+    }, [commentText]);
 
     const handleClick = (
         event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -310,7 +319,7 @@ const Post = (props: PostProps) => {
                             />
                             <Button
                                 variant="contained"
-                                disabled={!commentText}
+                                disabled={!canSubmit}
                                 className={classes.commentFormBtn}
                                 onClick={submitComment}
                             >

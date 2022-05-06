@@ -4,7 +4,7 @@ import { instance as axios } from '../../axios.config';
 import { SignupFormValues } from './types';
 import { useAlertsDispatcher } from '../../contexts/AlertsContext';
 import { Link, useNavigate } from 'react-router-dom';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller, useWatch } from 'react-hook-form';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
@@ -12,14 +12,39 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import TextFieldController from '../textFieldController/TextFieldController';
 
 const SignupForm = () => {
-    const { handleSubmit, control, setError, setFocus, clearErrors } =
-        useForm<SignupFormValues>({
-            mode: 'onSubmit',
-            criteriaMode: 'all',
-        });
+    const {
+        handleSubmit,
+        control,
+        setError,
+        setFocus,
+        clearErrors,
+        formState: { errors },
+    } = useForm<SignupFormValues>({
+        mode: 'onSubmit',
+        criteriaMode: 'all',
+    });
 
     const setAlertsContext = useAlertsDispatcher();
     const navigate = useNavigate();
+    const watchAllFields = useWatch({ control });
+    const errorsNumber = Object.keys(errors).length;
+
+    const [canSubmit, setCanSubmit] = React.useState(false);
+
+    React.useEffect(() => {
+        const { email, firstName, lastName, password } = watchAllFields;
+        if (
+            email?.trim() === '' ||
+            firstName?.trim() === '' ||
+            lastName?.trim() === '' ||
+            password?.trim() === '' ||
+            errorsNumber > 0
+        ) {
+            setCanSubmit(false);
+        } else {
+            setCanSubmit(true);
+        }
+    }, [watchAllFields, errorsNumber]);
 
     const validateMail = (email) => {
         if (
@@ -67,14 +92,24 @@ const SignupForm = () => {
                         label="Prénom"
                         defaultValue=""
                         control={control}
-                        rules={{ required: 'Veuillez entrer votre prénom' }}
+                        rules={{
+                            required: 'Veuillez entrer votre prénom',
+                            validate: (value) =>
+                                value.trim() !== '' ||
+                                'Les espaces ne sont pas valables',
+                        }}
                     />
                     <TextFieldController
                         name="lastName"
                         label="Nom"
                         defaultValue=""
                         control={control}
-                        rules={{ required: 'Veuillez entrer votre nom' }}
+                        rules={{
+                            required: 'Veuillez entrer votre nom',
+                            validate: (value) =>
+                                value.trim() !== '' ||
+                                'Les espaces ne sont pas valables',
+                        }}
                     />
                     <TextFieldController
                         name="email"
@@ -83,6 +118,9 @@ const SignupForm = () => {
                         control={control}
                         rules={{
                             required: 'Veuillez indiquer votre adresse mail',
+                            validate: (value) =>
+                                value.trim() !== '' ||
+                                'Les espaces ne sont pas valables',
                         }}
                         type="email"
                     />
@@ -104,6 +142,9 @@ const SignupForm = () => {
                                 message:
                                     'Votre mot de passe doit faire moins de 20 caractères',
                             },
+                            validate: (value) =>
+                                value.trim() !== '' ||
+                                'Les espaces ne sont pas valables',
                         }}
                         helperText="Votre mot de passe doit faire entre 8 et 20 caractères"
                     />
@@ -116,6 +157,7 @@ const SignupForm = () => {
                                     variant="outlined"
                                     className={classes.submitBtn}
                                     type="submit"
+                                    disabled={!canSubmit}
                                 >
                                     Envoyer
                                 </Button>

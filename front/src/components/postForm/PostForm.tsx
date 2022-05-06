@@ -13,8 +13,18 @@ import TextField from '@mui/material/TextField';
 
 const PostForm = (props: PostFormProps) => {
     const { open, handleClose } = props;
-    const [postText, setPostText] = React.useState('');
     const setAlertsContext = useAlertsDispatcher();
+
+    const [postText, setPostText] = React.useState('');
+    const [canSubmit, setCanSubmit] = React.useState(false);
+
+    React.useEffect(() => {
+        if (postText.trim() === '') {
+            setCanSubmit(false);
+        } else {
+            setCanSubmit(true);
+        }
+    }, [postText]);
 
     const submit = async () => {
         try {
@@ -68,7 +78,7 @@ const PostForm = (props: PostFormProps) => {
                     </Button>
                     <Button
                         onClick={submit}
-                        disabled={!postText}
+                        disabled={!canSubmit}
                         className={classes.button}
                         variant="contained"
                     >
