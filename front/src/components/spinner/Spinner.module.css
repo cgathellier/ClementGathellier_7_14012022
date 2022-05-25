@@ -1,32 +1,31 @@
 @keyframes show-spinner {
-	from {
-		z-index: 200;
-	}
-	to {
-		z-index: 200;
-	}
+    from {
+        z-index: 200;
+    }
+    to {
+        z-index: 200;
+    }
 }
 
 @keyframes spinner {
-	to {
-		transform: rotateZ(360deg);
-	}
+    to {
+        transform: rotateZ(360deg);
+    }
 }
 
 .spinnerContainer {
-    width: 60px;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #DADDE1;
+    background: transparent;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .spinnerGradient {
     width: 50px;
     height: 50px;
     position: relative;
-    background: linear-gradient(45deg, #091F43, #135cd1);
+    background: linear-gradient(45deg, #091f43, #135cd1);
     border-radius: 50%;
     animation-name: spinner;
     animation-duration: 1.5s;
@@ -38,7 +37,7 @@
     width: 45px;
     height: 45px;
     border-radius: 50% 50% 50% 30%;
-    background: #DADDE1;
+    background: #dadde1;
 }
 
 .spinnerRoundHead {
@@ -49,7 +48,7 @@
     left: 25px;
     border-radius: 50%;
     background: transparent;
-    box-shadow: -9px -5px 0 7px #DADDE1;
+    box-shadow: -9px -5px 0 7px #dadde1;
     z-index: 50;
     transform: rotateZ(-8deg);
 }

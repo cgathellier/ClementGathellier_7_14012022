@@ -69,6 +69,7 @@
     display: flex;
     justify-content: center;
     background-color: #dadde1;
+    position: relative;
 }
 
 .defaultHeight {

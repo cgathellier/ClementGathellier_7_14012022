@@ -2,15 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
-import { Routes, Route } from 'react-router-dom';
-import App from './App';
-import LoginForm from './components/loginForm/LoginForm';
-import SignupForm from './components/signupForm/SignupForm';
-import Feed from './components/feed/Feed';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { UserContextProvider } from './contexts/UserContext';
 import { AlertsContextProvider } from './contexts/AlertsContext';
-import Profile from './components/profile/Profile';
+import Spinner from './components/spinner/Spinner';
+import App from './App';
+const LoginForm = React.lazy(() => import('./components/loginForm/LoginForm'));
+const SignupForm = React.lazy(
+    () => import('./components/signupForm/SignupForm'),
+);
+const Feed = React.lazy(() => import('./components/feed/Feed'));
+const Profile = React.lazy(() => import('./components/profile/Profile'));
 
 ReactDOM.render(
     <UserContextProvider>
@@ -18,11 +20,46 @@ ReactDOM.render(
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<App />}>
-                        <Route path="login" element={<LoginForm />} />
-                        <Route path="signup" element={<SignupForm />} />
-                        <Route path="feed" element={<Feed />} />
-                        <Route path="profile/:userId" element={<Profile />} />
-                        <Route path="*" element={<Feed />} />
+                        <Route
+                            path="login"
+                            element={
+                                <React.Suspense fallback={<Spinner />}>
+                                    <LoginForm />
+                                </React.Suspense>
+                            }
+                        />
+                        <Route
+                            path="signup"
+                            element={
+                                <React.Suspense fallback={<Spinner />}>
+                                    <SignupForm />
+                                </React.Suspense>
+                            }
+                        />
+                        <Route
+                            path="feed"
+                            element={
+                                <React.Suspense fallback={<Spinner />}>
+                                    <Feed />
+                                </React.Suspense>
+                            }
+                        />
+                        <Route
+                            path="profile/:userId"
+                            element={
+                                <React.Suspense fallback={<Spinner />}>
+                                    <Profile />
+                                </React.Suspense>
+                            }
+                        />
+                        <Route
+                            path="*"
+                            element={
+                                <React.Suspense fallback={<Spinner />}>
+                                    <Feed />
+                                </React.Suspense>
+                            }
+                        />
                     </Route>
                 </Routes>
             </BrowserRouter>

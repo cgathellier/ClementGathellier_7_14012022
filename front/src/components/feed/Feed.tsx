@@ -4,11 +4,12 @@ import { PostType } from '../post/types';
 import classes from './Feed.module.css';
 import { UserContext } from '../../contexts/UserContext';
 import { useAlertsDispatcher } from '../../contexts/AlertsContext';
-import Post from '../post/Post';
-import PostForm from '../postForm/PostForm';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import { FeedProps } from './types';
+import Spinner from '../spinner/Spinner';
+import PostForm from '../postForm/PostForm';
+const Post = React.lazy(() => import('../post/Post'));
 
 const Feed = (props: FeedProps) => {
     const { posts: propsPosts, profileId, updateProfile } = props;
@@ -72,15 +73,21 @@ const Feed = (props: FeedProps) => {
                     </Button>
                 </Paper>
             )}
-            {posts.length > 0 ? (
-                posts.map((post) => (
-                    <Post post={post} key={post.id} updateFeed={getAllPosts} />
-                ))
-            ) : (
-                <span className={classes.noPosts}>
-                    Aucune publication à afficher
-                </span>
-            )}
+            <React.Suspense fallback={<Spinner />}>
+                {posts.length > 0 ? (
+                    posts.map((post) => (
+                        <Post
+                            post={post}
+                            key={post.id}
+                            updateFeed={getAllPosts}
+                        />
+                    ))
+                ) : (
+                    <span className={classes.noPosts}>
+                        Aucune publication à afficher
+                    </span>
+                )}
+            </React.Suspense>
             {postFormOpen && (
                 <PostForm open={postFormOpen} handleClose={closePostForm} />
             )}
