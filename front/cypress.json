@@ -1,0 +1,7 @@
+{
+    "baseUrl": "http://localhost:5000",
+    "env": {
+        "email": "admin@groupomania.com",
+        "password": "admin123"
+    }
+}
