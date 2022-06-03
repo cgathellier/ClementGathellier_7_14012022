@@ -98,6 +98,9 @@ const SignupForm = () => {
                                 value.trim() !== '' ||
                                 'Les espaces ne sont pas valables',
                         }}
+                        inputProps={{
+                            'data-cy': 'firstName',
+                        }}
                     />
                     <TextFieldController
                         name="lastName"
@@ -109,6 +112,9 @@ const SignupForm = () => {
                             validate: (value) =>
                                 value.trim() !== '' ||
                                 'Les espaces ne sont pas valables',
+                        }}
+                        inputProps={{
+                            'data-cy': 'lastName',
                         }}
                     />
                     <TextFieldController
@@ -123,6 +129,9 @@ const SignupForm = () => {
                                 'Les espaces ne sont pas valables',
                         }}
                         type="email"
+                        inputProps={{
+                            'data-cy': 'email',
+                        }}
                     />
                     <TextFieldController
                         name="password"
@@ -147,6 +156,9 @@ const SignupForm = () => {
                                 'Les espaces ne sont pas valables',
                         }}
                         helperText="Votre mot de passe doit faire entre 8 et 20 caractères"
+                        inputProps={{
+                            'data-cy': 'password',
+                        }}
                     />
                     <FormControl margin="normal">
                         <Controller
@@ -158,6 +170,7 @@ const SignupForm = () => {
                                     className={classes.submitBtn}
                                     type="submit"
                                     disabled={!canSubmit}
+                                    data-cy="submit"
                                 >
                                     Envoyer
                                 </Button>
@@ -166,7 +179,11 @@ const SignupForm = () => {
                     </FormControl>
                     <div className={classes.linkContainer}>
                         Vous avez déjà un compte ?
-                        <Link to="/login" className={classes.link}>
+                        <Link
+                            to="/login"
+                            className={classes.link}
+                            data-cy="toLogin"
+                        >
                             Connectez-vous <ChevronRightIcon />
                         </Link>
                     </div>

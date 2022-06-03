@@ -23,6 +23,7 @@ const TextFieldController = ({
     rules,
     helperText,
     type,
+    inputProps,
 }: TextFieldControllerProps) => {
     return (
         <Controller
@@ -42,6 +43,7 @@ const TextFieldController = ({
                         fullWidth
                         inputRef={ref}
                         sx={muiStyles.textField}
+                        inputProps={inputProps}
                         {...restField}
                     />
                     {error ? (

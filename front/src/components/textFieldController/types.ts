@@ -27,4 +27,5 @@ export interface TextFieldControllerProps {
     control: any;
     rules?: object;
     type?: string;
+    inputProps?: object;
 }

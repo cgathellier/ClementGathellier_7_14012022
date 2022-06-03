@@ -75,6 +75,9 @@ const LoginForm = () => {
                                 "Veuillez d'indiquer l'adresse mail du compte",
                         }}
                         type="email"
+                        inputProps={{
+                            'data-cy': 'email',
+                        }}
                     />
                     <TextFieldController
                         name="password"
@@ -96,6 +99,9 @@ const LoginForm = () => {
                         }}
                         helperText="Votre mot de passe doit faire entre 8 et 20 caractères"
                         type="password"
+                        inputProps={{
+                            'data-cy': 'password',
+                        }}
                     />
                     <FormControl margin="normal">
                         <Controller
@@ -107,6 +113,7 @@ const LoginForm = () => {
                                     className={classes.submitBtn}
                                     type="submit"
                                     disabled={!canSubmit}
+                                    data-cy="submit"
                                 >
                                     Envoyer
                                 </Button>
@@ -115,7 +122,11 @@ const LoginForm = () => {
                     </FormControl>
                     <div className={classes.linkContainer}>
                         Vous n'avez pas encore de compte ?
-                        <Link to="/signup" className={classes.link}>
+                        <Link
+                            to="/signup"
+                            className={classes.link}
+                            data-cy="toSignup"
+                        >
                             Inscrivez-vous <ChevronRightIcon />
                         </Link>
                     </div>
