@@ -33,6 +33,9 @@ const EditTextForm = (props: EditTextFormProps) => {
                 onChange={(event) => handleChange(event)}
                 inputRef={textAreaRef}
                 onFocus={handleFocus}
+                inputProps={{
+                    'data-testid': 'editTextInput',
+                }}
             />
             <div className={classes.buttonsContainer}>
                 <Button
@@ -50,6 +53,7 @@ const EditTextForm = (props: EditTextFormProps) => {
                         !updatedText || updatedText.trim() === text.trim()
                     }
                     className={classes.updateButtons}
+                    data-testid="submitEditedText"
                 >
                     Enregistrer
                 </Button>

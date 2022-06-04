@@ -66,6 +66,9 @@ const PostForm = (props: PostFormProps) => {
                         fullWidth
                         onChange={(event) => handleChange(event)}
                         autoFocus
+                        inputProps={{
+                            'data-testid': 'post-form-input',
+                        }}
                     />
                 </DialogContent>
                 <DialogActions className={classes.buttonContainer}>
@@ -81,6 +84,7 @@ const PostForm = (props: PostFormProps) => {
                         disabled={!canSubmit}
                         className={classes.button}
                         variant="contained"
+                        data-testid="submit-post"
                     >
                         Publier
                     </Button>

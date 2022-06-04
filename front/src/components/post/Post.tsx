@@ -213,7 +213,7 @@ const Post = (props: PostProps) => {
     };
 
     return (
-        <div className={classes.postContainer}>
+        <div className={classes.postContainer} data-testid="post">
             <Paper elevation={0} className={classes.post}>
                 <div className={classes.header}>
                     <div className={classes.postInfosContainer}>

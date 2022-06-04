@@ -68,6 +68,7 @@ const Feed = (props: FeedProps) => {
                         className={classes.postFormTrigger}
                         onClick={openPostForm}
                         variant="outlined"
+                        data-testid="openPostForm"
                     >
                         Créer une publication...
                     </Button>
