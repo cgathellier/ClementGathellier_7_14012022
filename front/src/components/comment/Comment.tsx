@@ -150,7 +150,7 @@ const Comment = (props: CommentProps) => {
     };
 
     return (
-        <div className={classes.commentContainer}>
+        <div className={classes.commentContainer} data-testid="comment">
             <div className={classes.content}>
                 <div className={classes.header}>
                     <div className={classes.commentInfosContainer}>

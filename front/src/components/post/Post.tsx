@@ -320,6 +320,7 @@ const Post = (props: PostProps) => {
                     <Button
                         className={classes.likes}
                         onClick={() => toggleComments(true)}
+                        data-testid="commentBtn"
                     >
                         <ChatBubbleOutlineIcon
                             fontSize="small"
@@ -342,12 +343,14 @@ const Post = (props: PostProps) => {
                                 className={classes.commentFormInput}
                                 inputRef={commentInputRef}
                                 onBlur={handleCommentInputBlur}
+                                data-testid="commentInput"
                             />
                             <Button
                                 variant="contained"
                                 disabled={!canSubmit}
                                 className={classes.commentFormBtn}
                                 onClick={submitComment}
+                                data-testid="commentSubmit"
                             >
                                 Publier
                             </Button>

@@ -1,11 +1,9 @@
-const email = 'john.doe@gmail.com';
-const password = 'mdpTest01';
 let token;
 
 before(function fetchUser() {
     cy.request('POST', 'http://localhost:3000/auth/login', {
-        email,
-        password,
+        email: 'john.doe@gmail.com',
+        password: 'mdpTest01',
     })
         .its('body')
         .then((res) => {
@@ -19,13 +17,37 @@ beforeEach(function setUser() {
             win.localStorage.setItem('gpmToken', token);
         },
     });
+
+    cy.request({
+        method: 'GET',
+        url: 'http://localhost:3000/posts',
+        failOnStatusCode: false,
+        auth: {
+            bearer: token,
+        },
+    }).then((res) => {
+        if (res.status === 404) {
+            cy.request({
+                method: 'POST',
+                url: 'http://localhost:3000/posts',
+                auth: {
+                    bearer: token,
+                },
+                body: {
+                    text: 'Lorem ipsum',
+                },
+            });
+        }
+    });
 });
 
-describe('Fetch posts, add, update, delete', () => {
+describe('Fetch, add, update, delete posts/comments', () => {
     const text = 'Lorem ipsum';
     const updateText = 'Lorem ipsum dolor sit amet';
+    const commentText = 'Random text';
+    const updateCommentText = 'Modified text';
 
-    it.only('creates a post', () => {
+    it('manages a post', () => {
         cy.url().should('include', '/feed');
 
         cy.get('[data-testid=openPostForm]').click();
@@ -88,6 +110,65 @@ describe('Fetch posts, add, update, delete', () => {
                         'have.length',
                         postsLength - 1,
                     );
+                });
+            });
+        });
+    });
+
+    it('manages a comment', () => {
+        cy.get('[data-testid=post]:first')
+            .find('[data-testid=commentBtn]')
+            .click()
+            .get('[data-testid=commentSubmit]')
+            .should('be.disabled')
+            .get('[data-testid=commentInput]')
+            .focused()
+            .type(commentText)
+            .should('have.text', commentText);
+
+        cy.intercept('GET', 'http://localhost:3000/posts').as('fetchPosts');
+        cy.get('[data-testid=commentSubmit]').click();
+
+        cy.wait('@fetchPosts').then((intercept) => {
+            const commentsLength =
+                intercept?.response?.body?.[0].comments?.length;
+
+            cy.get('[data-testid=comment]:last')
+                .find('button[aria-label*="Menu modifier"]')
+                .click()
+                .get('li:first')
+                .should('have.text', 'Modifier')
+                .click()
+                // formulaire modification
+                .get('[data-testid=editTextInput]')
+                .focused()
+                .should('have.text', commentText)
+                .get('[data-testid=submitEditedText]')
+                .should('be.disabled')
+                .get('[data-testid=editTextInput]')
+                .clear()
+                .get('[data-testid=submitEditedText]')
+                .should('be.disabled')
+                .get('[data-testid=editTextInput]')
+                .type(updateCommentText)
+                .get('[data-testid=submitEditedText]')
+                .click();
+
+            cy.wait('@fetchPosts').then(() => {
+                cy.contains(updateCommentText);
+
+                // suppression du commentaire
+                cy.get('[data-testid=comment]:last')
+                    .find('button[aria-label*="Menu modifier"]')
+                    .click()
+                    .get('li:last')
+                    .should('have.text', 'Supprimer')
+                    .click();
+
+                cy.wait('@fetchPosts').then(() => {
+                    cy.get('[data-testid=post]:first')
+                        .find('[data-testid=comment]')
+                        .should('have.length', commentsLength - 1);
                 });
             });
         });
