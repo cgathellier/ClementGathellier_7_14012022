@@ -47,19 +47,17 @@ describe('Sign up and log in', () => {
 
     describe('Log in', () => {
         beforeEach(() => {
-            cy.request(
-                {
-                    method: 'POST',
-                    url: 'http://localhost:3000/auth/signup',
-                    failOnStatusCode: false,
-                },
-                {
+            cy.request({
+                method: 'POST',
+                url: 'http://localhost:3000/auth/signup',
+                failOnStatusCode: false,
+                body: {
                     firstName,
                     lastName,
                     email,
                     password,
                 },
-            );
+            });
         });
 
         it('logs the user in', () => {

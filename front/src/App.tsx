@@ -84,6 +84,7 @@ function App() {
                             sx={{ color: 'white' }}
                             className={classes.backButton}
                             startIcon={<ArrowBackIosIcon />}
+                            aria-label="Retour au fil d'actualité"
                         >
                             Retour
                         </Button>

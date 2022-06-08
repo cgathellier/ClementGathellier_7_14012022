@@ -65,6 +65,7 @@ const ConfirmDialog = (props: ConfirmDialogProps) => {
         <>
             <h3>{title}</h3>
             <TextField
+                name="password"
                 onChange={handleChange}
                 value={password}
                 label="Mot de passe"
@@ -86,6 +87,7 @@ const ConfirmDialog = (props: ConfirmDialogProps) => {
                     disabled={!password}
                     className={classes.button}
                     variant="contained"
+                    data-testid="confirmSubmit"
                 >
                     {buttonText}
                 </Button>

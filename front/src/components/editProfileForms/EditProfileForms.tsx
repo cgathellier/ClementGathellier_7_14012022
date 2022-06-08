@@ -132,6 +132,7 @@ export const EditInfos = (props: EditProfileFormsProps) => {
                         disabled={!canSubmit}
                         variant="contained"
                         className={classes.button}
+                        data-testid="submitEditInfos"
                     >
                         Valider
                     </Button>
@@ -298,6 +299,7 @@ export const EditPassword = (props: EditProfileFormsProps) => {
                     variant="contained"
                     className={classes.button}
                     disabled={!canSubmit}
+                    data-testid="submitEditPassword"
                 >
                     Valider
                 </Button>
@@ -370,6 +372,7 @@ export const DeleteAccount = (props: EditProfileFormsProps) => {
                         onClick={toggleConfirmDialog}
                         variant="contained"
                         className={classes.button}
+                        data-testid="confirm"
                     >
                         Oui
                     </Button>

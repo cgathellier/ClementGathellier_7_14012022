@@ -97,7 +97,7 @@ const Profile = () => {
                     <div className={classes.userIconContainer}>
                         <AccountCircleIcon fontSize="inherit" />
                     </div>
-                    <span className={classes.userName}>
+                    <span className={classes.userName} data-testid="userName">
                         {userInfos.firstName} {userInfos.lastName}
                     </span>
                     {userContext?.id === userInfos.id && (
@@ -106,6 +106,7 @@ const Profile = () => {
                                 onClick={toggleEditMenu}
                                 variant="contained"
                                 startIcon={<EditIcon />}
+                                data-testid="openEditProfileMenu"
                             >
                                 Gérer le compte
                             </Button>
@@ -173,6 +174,7 @@ const Profile = () => {
                                                 fullWidth
                                                 action={actionRef}
                                                 onFocus={handleFocus}
+                                                data-testid="editInfos"
                                             >
                                                 Modifier mes informations
                                             </Button>
@@ -182,6 +184,7 @@ const Profile = () => {
                                                 }
                                                 variant="contained"
                                                 fullWidth
+                                                data-testid="editPassword"
                                             >
                                                 Modifier le mot de passe
                                             </Button>
@@ -191,6 +194,7 @@ const Profile = () => {
                                                 }
                                                 variant="contained"
                                                 fullWidth
+                                                data-testid="deleteAccount"
                                             >
                                                 Supprimer le compte
                                             </Button>
