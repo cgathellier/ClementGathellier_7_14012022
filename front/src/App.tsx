@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './App.module.css';
+import './prefixed/style.css';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { UserContext } from './contexts/UserContext';
 import { useAlertsDispatcher } from './contexts/AlertsContext';
@@ -75,64 +75,54 @@ function App() {
     ]);
 
     return (
-        <div className={classes.app}>
+        <div className="app">
             {location.pathname.includes('profile') ? (
                 <>
-                    <header className={classes.minHeader}>
+                    <header className="header--min">
                         <Button
                             onClick={goBackToFeed}
                             sx={{ color: 'white' }}
-                            className={classes.backButton}
+                            className="header--min__back-button"
                             startIcon={<ArrowBackIosIcon />}
                             aria-label="Retour au fil d'actualité"
                         >
                             Retour
                         </Button>
                     </header>
-                    <div
-                        className={`${classes.content} ${classes.heightWithMinHeader}`}
-                    >
+                    <div className="content--max">
                         <Outlet />
                     </div>
                 </>
             ) : (
                 <>
-                    <header className={classes.header}>
+                    <header className="header">
                         <img
                             src={GroupomaniaLogo}
                             alt="Logo Groupomania"
-                            className={classes.logo}
+                            className="header__logo"
                         />
                         {userContext && (
                             <>
                                 <Button
                                     onClick={goToMyProfile}
-                                    sx={{ color: 'white' }}
-                                    className={classes.accountButton}
+                                    className="header__account-button"
                                     startIcon={
-                                        <AccountCircleIcon
-                                            className={classes.accountIcon}
-                                        />
+                                        <AccountCircleIcon className="header__account-icon" />
                                     }
                                     aria-label="Aller à mon profil"
                                 />
                                 <Button
                                     onClick={logout}
-                                    sx={{ color: 'white' }}
-                                    className={classes.logoutButton}
+                                    className="header__logout-button"
                                     startIcon={
-                                        <LogoutIcon
-                                            className={classes.logoutIcon}
-                                        />
+                                        <LogoutIcon className="header__logout-icon" />
                                     }
                                     aria-label="Se déconnecter"
                                 />
                             </>
                         )}
                     </header>
-                    <div
-                        className={`${classes.content} ${classes.defaultHeight}`}
-                    >
+                    <div className="content">
                         <Outlet />
                     </div>
                 </>

@@ -1,0 +1,13 @@
+@use '../utils/mixins';
+
+.content {
+    @include mixins.content;
+    min-height: calc(100vh - 80px);
+    margin-top: 80px;
+
+    &--max {
+        @include mixins.content;
+        min-height: calc(100vh - 40px);
+        margin-top: 40px;
+    }
+}

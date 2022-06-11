@@ -1,0 +1,16 @@
+@use './variables';
+
+@mixin headers {
+    background-color: variables.$primary-color;
+    z-index: 100;
+    position: fixed;
+    left: 0;
+    right: 0;
+}
+
+@mixin content {
+    display: flex;
+    justify-content: center;
+    background-color: #dadde1;
+    position: relative;
+}
