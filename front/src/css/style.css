@@ -45,6 +45,13 @@ code {
   width: 100%;
 }
 
+.edit-publication-button {
+  padding-top: 0px !important;
+  padding-right: 0px !important;
+  display: flex !important;
+  justify-content: flex-end !important;
+}
+
 .header {
   background-color: #091f43;
   z-index: 100;
@@ -138,12 +145,6 @@ code {
   margin-bottom: 4px;
   cursor: pointer;
 }
-.comment__menu-button {
-  padding-top: 0px !important;
-  padding-right: 0px !important;
-  display: flex !important;
-  justify-content: flex-end !important;
-}
 .comment__like-button {
   width: fit-content;
   margin-top: 4px;
@@ -183,6 +184,88 @@ code {
 .comment__likes-count {
   font-size: 0.9em;
   color: #707070;
+}
+
+.comments__container {
+  padding-bottom: 6px;
+}
+.comments-form {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+}
+.comments-form__input {
+  width: calc(100% - 100px);
+}
+.comments-form__submit {
+  height: 56px;
+}
+
+.post {
+  width: 100%;
+  margin-top: 8px;
+  padding: 12px 12px 0px 12px;
+  background-color: #dadde1;
+}
+.post__header {
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+.post__infos {
+  width: 100%;
+}
+.post__author {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.post__text {
+  margin-bottom: 24px;
+  text-align: justify;
+}
+.post__reactions {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.post__reactions-buttons-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+.post__likes-count {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: black !important;
+}
+.post__likes {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: black !important;
+  width: 40%;
+  padding: 8px !important;
+  text-transform: none !important;
+  font-size: 1em !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
+  font-weight: normal !important;
+}
+.post__likes.liked {
+  color: #1860d4;
+}
+.post__comments-count {
+  cursor: pointer;
+}
+
+.separator {
+  width: 90%;
+  margin: auto;
+  border-top: solid 1px #dadde1;
+}
+.separator--full {
+  width: 100%;
 }
 
 /*# sourceMappingURL=style.css.map */

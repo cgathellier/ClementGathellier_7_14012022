@@ -1,3 +1,6 @@
+@use '../utils/mixins';
+@use '../utils/variables';
+
 .comment {
     display: flex;
     flex-direction: column;
@@ -13,22 +16,13 @@
     }
 
     &__header {
-        margin-bottom: 16px;
-        display: flex;
-        justify-content: space-between;
+        @include mixins.publicationHeaders;
     }
 
     &__author {
         font-weight: bold;
         margin-bottom: 4px;
         cursor: pointer;
-    }
-
-    &__menu-button {
-        padding-top: 0px !important;
-        padding-right: 0px !important;
-        display: flex !important;
-        justify-content: flex-end !important;
     }
 
     &__like-button {
@@ -41,7 +35,7 @@
         cursor: pointer;
 
         &.liked {
-            color: #1860d4;
+            color: variables.$secondary-color;
         }
     }
 
@@ -66,7 +60,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #1860d4;
+        background-color: variables.$secondary-color;
         border-radius: 50%;
         color: white;
     }
@@ -74,5 +68,25 @@
     &__likes-count {
         font-size: 0.9em;
         color: #707070;
+    }
+}
+
+.comments {
+    &__container {
+        padding-bottom: 6px;
+    }
+
+    &-form {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 0;
+
+        &__input {
+            width: calc(100% - 100px);
+        }
+
+        &__submit {
+            height: 56px;
+        }
     }
 }

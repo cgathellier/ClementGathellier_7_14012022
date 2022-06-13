@@ -14,3 +14,9 @@
     background-color: #dadde1;
     position: relative;
 }
+
+@mixin publicationHeaders {
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+}

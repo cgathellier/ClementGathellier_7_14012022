@@ -5,7 +5,6 @@ import { UserContext } from '../../contexts/UserContext';
 import { useAlertsDispatcher } from '../../contexts/AlertsContext';
 import { instance as axios } from '../../axios.config';
 import getMomentDiff from '../../moment.utils';
-import classes from './Post.module.css';
 import Paper from '@mui/material/Paper';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
@@ -212,169 +211,169 @@ const Post = (props: PostProps) => {
         }
     };
 
-    return (
-        <div className={classes.postContainer} data-testid="post">
-            <Paper elevation={0} className={classes.post}>
-                <div className={classes.header}>
-                    <div className={classes.postInfosContainer}>
-                        <div
-                            onClick={goToProfile}
-                            className={classes.author}
-                            onKeyPress={handleKeyPressOnAuthor}
-                            tabIndex={0}
-                        >{`${author.firstName} ${author.lastName}`}</div>
-                        <div className={classes.diffText}>
-                            {dateTexts.diffText}
-                        </div>
-                        <div className={classes.formattedDate}>
-                            {dateTexts.formattedDate}
-                        </div>
-                    </div>
-                    {userContext &&
-                        (userContext.id === author.id ||
-                            userContext.isAdmin) && (
-                            <div>
-                                <Button
-                                    onClick={(e) => handleClick(e)}
-                                    className={classes.menuBtn}
-                                    aria-label="Menu modifier/supprimer la publication"
-                                >
-                                    <MoreHorizIcon />
-                                </Button>
-                                <Menu
-                                    id="basic-menu"
-                                    anchorEl={anchorEl}
-                                    open={menuOpen}
-                                    onClose={handleClose}
-                                >
-                                    {userContext.id === author.id && (
-                                        <MenuItem onClick={openUpdate}>
-                                            Modifier
-                                        </MenuItem>
-                                    )}
-                                    {(userContext.id === author.id ||
-                                        userContext.isAdmin) && (
-                                        <MenuItem onClick={handleDelete}>
-                                            Supprimer
-                                        </MenuItem>
-                                    )}
-                                </Menu>
-                            </div>
-                        )}
-                </div>
-                {isUpdating ? (
-                    <EditTextForm
-                        updatedText={updatedText}
-                        handleChange={handleChange}
-                        hideUpdate={hideUpdate}
-                        submitUpdate={submitPostUpdate}
-                        text={text}
-                    />
-                ) : (
-                    <div className={classes.text}>{text}</div>
-                )}
+    const likeButtonClasses = () => {
+        let hasUserLikedPost = false;
+        likes.forEach((like) => {
+            if (like && userContext) {
+                if (like.userId === userContext.id) {
+                    hasUserLikedPost = true;
+                }
+            }
+        });
 
-                <div className={classes.reactions}>
-                    <span className={classes.likesCount}>
+        const classes = hasUserLikedPost
+            ? 'post__like-button liked'
+            : 'post__like-button';
+
+        return classes;
+    };
+
+    return (
+        <Paper elevation={0} className="post">
+            <div className="post__header">
+                <div className="post__infos">
+                    <div
+                        onClick={goToProfile}
+                        className="post__author"
+                        onKeyPress={handleKeyPressOnAuthor}
+                        tabIndex={0}
+                    >{`${author.firstName} ${author.lastName}`}</div>
+                    <div className="diff-text">{dateTexts.diffText}</div>
+                    <div className="formatted-date">
+                        {dateTexts.formattedDate}
+                    </div>
+                </div>
+                {userContext &&
+                    (userContext.id === author.id || userContext.isAdmin) && (
+                        <div>
+                            <Button
+                                onClick={(e) => handleClick(e)}
+                                className="edit-publication-button"
+                                aria-label="Menu modifier/supprimer la publication"
+                            >
+                                <MoreHorizIcon />
+                            </Button>
+                            <Menu
+                                id="basic-menu"
+                                anchorEl={anchorEl}
+                                open={menuOpen}
+                                onClose={handleClose}
+                            >
+                                {userContext.id === author.id && (
+                                    <MenuItem onClick={openUpdate}>
+                                        Modifier
+                                    </MenuItem>
+                                )}
+                                {(userContext.id === author.id ||
+                                    userContext.isAdmin) && (
+                                    <MenuItem onClick={handleDelete}>
+                                        Supprimer
+                                    </MenuItem>
+                                )}
+                            </Menu>
+                        </div>
+                    )}
+            </div>
+            {isUpdating ? (
+                <EditTextForm
+                    updatedText={updatedText}
+                    handleChange={handleChange}
+                    hideUpdate={hideUpdate}
+                    submitUpdate={submitPostUpdate}
+                    text={text}
+                />
+            ) : (
+                <div className="post__text">{text}</div>
+            )}
+
+            <div className="post__reactions">
+                <span className="post__likes-count">
+                    <ThumbUpAltIcon
+                        fontSize="small"
+                        sx={{ marginRight: '4px' }}
+                    />
+                    {likes?.length}
+                </span>
+                <span
+                    onKeyPress={handleKeyPressOnCommentsCount}
+                    tabIndex={0}
+                    className="post__comments-count"
+                    onClick={() => toggleComments()}
+                >
+                    {comments.length} commentaires
+                </span>
+            </div>
+
+            <div className="separator"></div>
+
+            <div className="post__reactions-buttons-container">
+                <Button className={likeButtonClasses()} onClick={handleLike}>
+                    {hasUserLikedPost ? (
                         <ThumbUpAltIcon
                             fontSize="small"
                             sx={{ marginRight: '4px' }}
                         />
-                        {likes?.length}
-                    </span>
-                    <span
-                        onKeyPress={handleKeyPressOnCommentsCount}
-                        tabIndex={0}
-                        className={classes.commentsCount}
-                        onClick={() => toggleComments()}
-                    >
-                        {comments.length} commentaires
-                    </span>
-                </div>
-
-                <div className={classes.barContainer}>
-                    <div className={classes.bar}></div>
-                </div>
-
-                <div className={classes.reactOptions}>
-                    <Button
-                        className={[
-                            classes.likes,
-                            hasUserLikedPost && classes.liked,
-                        ].join(' ')}
-                        onClick={handleLike}
-                    >
-                        {hasUserLikedPost ? (
-                            <ThumbUpAltIcon
-                                fontSize="small"
-                                sx={{ marginRight: '4px' }}
-                            />
-                        ) : (
-                            <ThumbUpOffAltIcon
-                                fontSize="small"
-                                sx={{ marginRight: '4px' }}
-                            />
-                        )}
-                        J'aime
-                    </Button>
-                    <Button
-                        className={classes.likes}
-                        onClick={() => toggleComments(true)}
-                        data-testid="commentBtn"
-                    >
-                        <ChatBubbleOutlineIcon
+                    ) : (
+                        <ThumbUpOffAltIcon
                             fontSize="small"
                             sx={{ marginRight: '4px' }}
                         />
-                        Commenter
-                    </Button>
-                </div>
-                {showComments && (
-                    <>
-                        <div className={classes.barContainer}>
-                            <div className={classes.fullBar}></div>
-                        </div>
-                        <div className={classes.commentFormContainer}>
-                            <TextField
-                                multiline
-                                value={commentText}
-                                placeholder="Votre commentaire..."
-                                onChange={(event) => handleChangeComment(event)}
-                                className={classes.commentFormInput}
-                                inputRef={commentInputRef}
-                                onBlur={handleCommentInputBlur}
-                                data-testid="commentInput"
+                    )}
+                    J'aime
+                </Button>
+                <Button
+                    className="post__likes"
+                    onClick={() => toggleComments(true)}
+                    data-testid="commentBtn"
+                >
+                    <ChatBubbleOutlineIcon
+                        fontSize="small"
+                        sx={{ marginRight: '4px' }}
+                    />
+                    Commenter
+                </Button>
+            </div>
+            {showComments && (
+                <>
+                    <div className="separator separator--full"></div>
+                    <div className="comments-form">
+                        <TextField
+                            multiline
+                            value={commentText}
+                            placeholder="Votre commentaire..."
+                            onChange={(event) => handleChangeComment(event)}
+                            className="comments-form__input"
+                            inputRef={commentInputRef}
+                            onBlur={handleCommentInputBlur}
+                            data-testid="commentInput"
+                        />
+                        <Button
+                            variant="contained"
+                            disabled={!canSubmit}
+                            className="comments-form__submit"
+                            onClick={submitComment}
+                            data-testid="commentSubmit"
+                        >
+                            Publier
+                        </Button>
+                    </div>
+                </>
+            )}
+            {showComments && comments.length > 0 && (
+                <>
+                    <div className="separator separator--full"></div>
+                    <div className="comments__container">
+                        {comments.map((comment) => (
+                            <Comment
+                                key={comment.id}
+                                comment={comment}
+                                updateFeed={updateFeed}
                             />
-                            <Button
-                                variant="contained"
-                                disabled={!canSubmit}
-                                className={classes.commentFormBtn}
-                                onClick={submitComment}
-                                data-testid="commentSubmit"
-                            >
-                                Publier
-                            </Button>
-                        </div>
-                    </>
-                )}
-                {showComments && comments.length > 0 && (
-                    <>
-                        <div className={classes.barContainer}>
-                            <div className={classes.fullBar}></div>
-                        </div>
-                        <div className={classes.commentsContainer}>
-                            {comments.map((comment) => (
-                                <Comment
-                                    key={comment.id}
-                                    comment={comment}
-                                    updateFeed={updateFeed}
-                                />
-                            ))}
-                        </div>
-                    </>
-                )}
-            </Paper>
-        </div>
+                        ))}
+                    </div>
+                </>
+            )}
+        </Paper>
     );
 };
 
