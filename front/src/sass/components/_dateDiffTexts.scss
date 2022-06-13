@@ -1,0 +1,27 @@
+.diff-text {
+    cursor: pointer;
+    font-size: 0.8em;
+    position: relative;
+    width: fit-content;
+
+    &:hover {
+        text-decoration: underline;
+
+        & + .formatted-date {
+            opacity: 0.9;
+            transition: opacity 0.3s ease-in-out;
+        }
+    }
+}
+
+.formatted-date {
+    width: fit-content !important;
+    padding: 8px;
+    font-size: 0.8em;
+    background-color: rgb(238, 238, 238);
+    position: absolute;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    width: 100%;
+}

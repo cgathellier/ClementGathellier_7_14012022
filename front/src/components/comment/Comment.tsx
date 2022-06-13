@@ -5,7 +5,6 @@ import { UserContext } from '../../contexts/UserContext';
 import { useAlertsDispatcher } from '../../contexts/AlertsContext';
 import { instance as axios } from '../../axios.config';
 import getMomentDiff from '../../moment.utils';
-import classes from './Comment.module.css';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
@@ -41,7 +40,9 @@ const Comment = (props: CommentProps) => {
             }
         }
     });
-    const isLikeButtonLiked = hasUserLikedComment ? classes.liked : '';
+    const likeButtonClasses = hasUserLikedComment
+        ? 'comment__like-button liked'
+        : 'comment__like-button';
 
     React.useEffect(() => {
         setUpdatedText(text);
@@ -150,24 +151,22 @@ const Comment = (props: CommentProps) => {
     };
 
     return (
-        <div className={classes.commentContainer} data-testid="comment">
-            <div className={classes.content}>
-                <div className={classes.header}>
-                    <div className={classes.commentInfosContainer}>
+        <div className="comment" data-testid="comment">
+            <div className="comment__content">
+                <div className="comment__header">
+                    <div>
                         <div
                             tabIndex={0}
                             onKeyPress={handleKeyPressOnAuthor}
                             onClick={goToProfile}
-                            className={classes.author}
+                            className="comment__author"
                         >
                             {author
                                 ? `${author.firstName} ${author.lastName}`
                                 : 'Utilisateur supprimé'}
                         </div>
-                        <div className={classes.diffText}>
-                            {dateTexts.diffText}
-                        </div>
-                        <div className={classes.formattedDate}>
+                        <div className="diff-text">{dateTexts.diffText}</div>
+                        <div className="formatted-date">
                             {dateTexts.formattedDate}
                         </div>
                     </div>
@@ -177,7 +176,7 @@ const Comment = (props: CommentProps) => {
                             <div>
                                 <Button
                                     onClick={(e) => handleClick(e)}
-                                    className={classes.menuBtn}
+                                    className="comment__menu-button"
                                     aria-label="Menu modifier/supprimer le commentaire"
                                 >
                                     <MoreHorizIcon />
@@ -216,11 +215,11 @@ const Comment = (props: CommentProps) => {
                     <span>{text}</span>
                 )}
                 {likes.length > 0 && (
-                    <span className={classes.likes}>
-                        <div className={classes.likeIconContainer}>
+                    <span className="comment__likes">
+                        <div className="comment__like-icon">
                             <ThumbUpAltIcon sx={{ fontSize: '0.8em' }} />
                         </div>
-                        <div className={classes.likesCount}>
+                        <div className="comment__likes-count">
                             {likes?.length}
                         </div>
                     </span>
@@ -228,7 +227,7 @@ const Comment = (props: CommentProps) => {
             </div>
             <div
                 tabIndex={0}
-                className={`${classes.likeBtn} ${isLikeButtonLiked}`}
+                className={likeButtonClasses}
                 onClick={likeComment}
                 onKeyPress={handleKeyPressOnLike}
             >
