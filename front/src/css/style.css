@@ -52,6 +52,15 @@ code {
   justify-content: flex-end !important;
 }
 
+.cancelable-forms__buttons-container {
+  display: flex !important;
+  justify-content: space-between !important;
+  margin-top: 12px !important;
+}
+.cancelable-forms__button {
+  width: 48% !important;
+}
+
 .header {
   background-color: #091f43;
   z-index: 100;

@@ -5,9 +5,6 @@ import classes from './PostForm.module.css';
 import { useAlertsDispatcher } from '../../contexts/AlertsContext';
 import FocusTrap from 'focus-trap-react';
 import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
@@ -54,10 +51,8 @@ const PostForm = (props: PostFormProps) => {
     return (
         <FocusTrap>
             <Dialog open={open} onClose={handleClose} fullWidth>
-                <DialogTitle className={classes.title}>
-                    Créer une publication
-                </DialogTitle>
-                <DialogContent className={classes.dialogContent}>
+                <h2 className={classes.title}>Créer une publication</h2>
+                <div className={classes.dialogContent}>
                     <TextField
                         multiline
                         minRows={3}
@@ -70,25 +65,25 @@ const PostForm = (props: PostFormProps) => {
                             'data-testid': 'post-form-input',
                         }}
                     />
-                </DialogContent>
-                <DialogActions className={classes.buttonContainer}>
-                    <Button
-                        onClick={() => handleClose(true)}
-                        className={classes.button}
-                        variant="outlined"
-                    >
-                        Annuler
-                    </Button>
-                    <Button
-                        onClick={submit}
-                        disabled={!canSubmit}
-                        className={classes.button}
-                        variant="contained"
-                        data-testid="submit-post"
-                    >
-                        Publier
-                    </Button>
-                </DialogActions>
+                    <div className="cancelable-forms__buttons-container">
+                        <Button
+                            onClick={() => handleClose(true)}
+                            className="cancelable-forms__button"
+                            variant="outlined"
+                        >
+                            Annuler
+                        </Button>
+                        <Button
+                            onClick={submit}
+                            disabled={!canSubmit}
+                            className="cancelable-forms__button"
+                            variant="contained"
+                            data-testid="submit-post"
+                        >
+                            Publier
+                        </Button>
+                    </div>
+                </div>
             </Dialog>
         </FocusTrap>
     );

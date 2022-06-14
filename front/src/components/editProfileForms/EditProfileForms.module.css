@@ -9,7 +9,6 @@
 
 .form {
     width: 100%;
-    margin-bottom: 24px;
 }
 
 .infoText {
@@ -18,16 +17,6 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-}
-
-.buttonsContainer {
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-}
-
-.button {
-    width: 48%;
 }
 
 .formError {

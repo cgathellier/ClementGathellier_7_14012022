@@ -73,11 +73,11 @@ const ConfirmDialog = (props: ConfirmDialogProps) => {
                 type="password"
                 inputRef={inputRef}
             />
-            <div className={classes.buttonsContainer}>
+            <div className="cancelable-forms__buttons-container">
                 <Button
                     onClick={handleClose}
                     variant="outlined"
-                    className={classes.button}
+                    className="cancelable-forms__button"
                 >
                     Annuler
                 </Button>
@@ -85,7 +85,7 @@ const ConfirmDialog = (props: ConfirmDialogProps) => {
                 <Button
                     onClick={confirm}
                     disabled={!password}
-                    className={classes.button}
+                    className="cancelable-forms__button"
                     variant="contained"
                     data-testid="confirmSubmit"
                 >

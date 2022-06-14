@@ -119,11 +119,11 @@ export const EditInfos = (props: EditProfileFormsProps) => {
                         rules={{ required: 'Veuillez entrer votre nom' }}
                     />
                 </form>
-                <div className={classes.buttonsContainer}>
+                <div className="cancelable-forms__buttons-container">
                     <Button
                         onClick={() => setSelectedForm(null)}
                         variant="outlined"
-                        className={classes.button}
+                        className="cancelable-forms__button"
                     >
                         Annuler
                     </Button>
@@ -131,7 +131,7 @@ export const EditInfos = (props: EditProfileFormsProps) => {
                         onClick={toggleConfirmDialog}
                         disabled={!canSubmit}
                         variant="contained"
-                        className={classes.button}
+                        className="cancelable-forms__button"
                         data-testid="submitEditInfos"
                     >
                         Valider
@@ -286,18 +286,18 @@ export const EditPassword = (props: EditProfileFormsProps) => {
                     type="password"
                 />
             </form>
-            <div className={classes.buttonsContainer}>
+            <div className="cancelable-forms__buttons-container">
                 <Button
                     onClick={() => setSelectedForm(null)}
                     variant="outlined"
-                    className={classes.button}
+                    className="cancelable-forms__button"
                 >
                     Annuler
                 </Button>
                 <Button
                     onClick={handleSubmit(checkErrorsAndCredentials)}
                     variant="contained"
-                    className={classes.button}
+                    className="cancelable-forms__button"
                     disabled={!canSubmit}
                     data-testid="submitEditPassword"
                 >
@@ -360,18 +360,18 @@ export const DeleteAccount = (props: EditProfileFormsProps) => {
                         Souhaitez-vous vraiment supprimer votre compte ?
                     </span>
                 </div>
-                <div className={classes.buttonsContainer}>
+                <div className="cancelable-forms__buttons-container">
                     <Button
                         onClick={() => setSelectedForm(null)}
                         variant="outlined"
-                        className={classes.button}
+                        className="cancelable-forms__button"
                     >
                         Non
                     </Button>
                     <Button
                         onClick={toggleConfirmDialog}
                         variant="contained"
-                        className={classes.button}
+                        className="cancelable-forms__button"
                         data-testid="confirm"
                     >
                         Oui

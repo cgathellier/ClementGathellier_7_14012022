@@ -25,7 +25,7 @@ const EditTextForm = (props: EditTextFormProps) => {
     };
 
     return (
-        <>
+        <form className={classes.form}>
             <TextField
                 fullWidth
                 multiline
@@ -37,12 +37,12 @@ const EditTextForm = (props: EditTextFormProps) => {
                     'data-testid': 'editTextInput',
                 }}
             />
-            <div className={classes.buttonsContainer}>
+            <div className="cancelable-forms__buttons-container">
                 <Button
                     variant="outlined"
                     onClick={hideUpdate}
                     disabled={!updatedText}
-                    className={classes.updateButtons}
+                    className="cancelable-forms__button"
                 >
                     Annuler
                 </Button>
@@ -52,13 +52,13 @@ const EditTextForm = (props: EditTextFormProps) => {
                     disabled={
                         !updatedText || updatedText.trim() === text.trim()
                     }
-                    className={classes.updateButtons}
+                    className="cancelable-forms__button"
                     data-testid="submitEditedText"
                 >
                     Enregistrer
                 </Button>
             </div>
-        </>
+        </form>
     );
 };
 
