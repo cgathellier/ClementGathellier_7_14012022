@@ -1,6 +1,5 @@
 import React from 'react';
 import { EditTextFormProps } from './types';
-import classes from './EditTextForm.module.css';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
@@ -25,7 +24,7 @@ const EditTextForm = (props: EditTextFormProps) => {
     };
 
     return (
-        <form className={classes.form}>
+        <form className="editTextForm">
             <TextField
                 fullWidth
                 multiline
