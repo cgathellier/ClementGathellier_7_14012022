@@ -277,4 +277,28 @@ code {
   width: 100%;
 }
 
+.editProfileForm {
+  width: 100%;
+  padding: 20px;
+}
+.editProfileForm__title {
+  font-size: 1.5em;
+}
+.editProfileForm__info-text {
+  height: 100px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.editProfileForm--hidden {
+  display: none;
+}
+
+@media screen and (min-width: 600px) {
+  .editProfileForm {
+    max-width: 450px;
+  }
+}
+
 /*# sourceMappingURL=style.css.map */

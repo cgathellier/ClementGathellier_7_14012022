@@ -1,6 +1,5 @@
 import React from 'react';
 import { ConfirmDialogProps } from './types';
-import classes from './ConfirmDialog.module.css';
 import { instance as axios } from '../../axios.config';
 import { useAlertsDispatcher } from '../../contexts/AlertsContext';
 import Button from '@mui/material/Button';

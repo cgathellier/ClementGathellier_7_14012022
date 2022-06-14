@@ -4,7 +4,6 @@ import {
     EditInfosFormValues,
     EditPasswordFormValues,
 } from './types';
-import classes from './EditProfileForms.module.css';
 import { instance as axios } from '../../axios.config';
 import { UserContext } from '../../contexts/UserContext';
 import { useAlertsDispatcher } from '../../contexts/AlertsContext';
@@ -34,6 +33,13 @@ export const EditInfos = (props: EditProfileFormsProps) => {
 
     const [openConfirm, setOpenConfirm] = React.useState(false);
     const [canSubmit, setCanSubmit] = React.useState(false);
+
+    const formClasses = openConfirm
+        ? 'editProfileForm--hidden'
+        : 'editProfileForm';
+    const confirmDialogClasses = openConfirm
+        ? 'editProfileForm'
+        : 'editProfileForm--hidden';
 
     React.useEffect(() => {
         if (Object.keys(watchAllFields).length && userContext) {
@@ -88,13 +94,11 @@ export const EditInfos = (props: EditProfileFormsProps) => {
 
     return (
         <>
-            <div
-                className={`${classes.formContainer} ${
-                    openConfirm && classes.hidden
-                }`}
-            >
-                <h2 className={classes.title}>Modifier mes informations</h2>
-                <form className={classes.form}>
+            <div className={formClasses}>
+                <h2 className="editProfileForm__title">
+                    Modifier mes informations
+                </h2>
+                <form>
                     <TextFieldController
                         name="email"
                         label="Email"
@@ -138,7 +142,7 @@ export const EditInfos = (props: EditProfileFormsProps) => {
                     </Button>
                 </div>
             </div>
-            <div className={`${!openConfirm && classes.hidden}`}>
+            <div className={confirmDialogClasses}>
                 <ConfirmDialog
                     open={openConfirm}
                     handleClose={toggleConfirmDialog}
@@ -252,9 +256,9 @@ export const EditPassword = (props: EditProfileFormsProps) => {
     };
 
     return (
-        <div className={classes.formContainer}>
-            <h2 className={classes.title}>Modifier le mot de passe</h2>
-            <form className={classes.form}>
+        <div className="editProfileForm">
+            <h2 className="editProfileForm__title">Modifier le mot de passe</h2>
+            <form>
                 <TextFieldController
                     name="password"
                     label="Mot de passe actuel"
@@ -317,6 +321,13 @@ export const DeleteAccount = (props: EditProfileFormsProps) => {
 
     const [openConfirm, setOpenConfirm] = React.useState(false);
 
+    const formClasses = openConfirm
+        ? 'editProfileForm--hidden'
+        : 'editProfileForm';
+    const confirmDialogClasses = openConfirm
+        ? 'editProfileForm'
+        : 'editProfileForm--hidden';
+
     const toggleConfirmDialog = () => {
         setOpenConfirm((prevState) => !prevState);
     };
@@ -345,13 +356,9 @@ export const DeleteAccount = (props: EditProfileFormsProps) => {
 
     return (
         <>
-            <div
-                className={`${classes.formContainer} ${
-                    openConfirm && classes.hidden
-                }`}
-            >
-                <h2 className={classes.title}>Supprimer le compte</h2>
-                <div className={classes.infoText}>
+            <div className={formClasses}>
+                <h2 className="editProfileForm__title">Supprimer le compte</h2>
+                <div className="editProfileForm__info-text">
                     <span>
                         <strong>Attention</strong> : la suppression du compte
                         est définitive.
@@ -378,7 +385,7 @@ export const DeleteAccount = (props: EditProfileFormsProps) => {
                     </Button>
                 </div>
             </div>
-            <div className={`${!openConfirm && classes.hidden}`}>
+            <div className={confirmDialogClasses}>
                 <ConfirmDialog
                     open={openConfirm}
                     handleClose={toggleConfirmDialog}
