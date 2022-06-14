@@ -1,7 +1,6 @@
 import React from 'react';
 import { instance as axios } from '../../axios.config';
 import { PostType } from '../post/types';
-import classes from './Feed.module.css';
 import { UserContext } from '../../contexts/UserContext';
 import { useAlertsDispatcher } from '../../contexts/AlertsContext';
 import Paper from '@mui/material/Paper';
@@ -58,14 +57,11 @@ const Feed = (props: FeedProps) => {
     }, [propsPosts, profileId, getAllPosts]);
 
     return (
-        <div className={classes.feed}>
+        <div className="feed">
             {(!profileId || profileId === userContext?.id) && (
-                <Paper
-                    elevation={0}
-                    className={classes.postFormTriggerContainer}
-                >
+                <Paper elevation={0} className="feed__open-post-form-container">
                     <Button
-                        className={classes.postFormTrigger}
+                        className="feed__open-post-form"
                         onClick={openPostForm}
                         variant="outlined"
                         data-testid="openPostForm"
@@ -84,7 +80,7 @@ const Feed = (props: FeedProps) => {
                         />
                     ))
                 ) : (
-                    <span className={classes.noPosts}>
+                    <span className="feed__no-posts">
                         Aucune publication à afficher
                     </span>
                 )}
