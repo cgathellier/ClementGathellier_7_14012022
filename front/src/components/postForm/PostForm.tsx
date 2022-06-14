@@ -1,7 +1,6 @@
 import React from 'react';
 import { instance as axios } from '../../axios.config';
 import { PostFormProps } from './types';
-import classes from './PostForm.module.css';
 import { useAlertsDispatcher } from '../../contexts/AlertsContext';
 import FocusTrap from 'focus-trap-react';
 import Dialog from '@mui/material/Dialog';
@@ -51,8 +50,8 @@ const PostForm = (props: PostFormProps) => {
     return (
         <FocusTrap>
             <Dialog open={open} onClose={handleClose} fullWidth>
-                <h2 className={classes.title}>Créer une publication</h2>
-                <div className={classes.dialogContent}>
+                <h2 className="postForm__title">Créer une publication</h2>
+                <div className="postForm__content">
                     <TextField
                         multiline
                         minRows={3}

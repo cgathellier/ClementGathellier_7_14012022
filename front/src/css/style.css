@@ -339,5 +339,12 @@ code {
     width: 500px;
   }
 }
+.postForm__title {
+  text-align: center;
+  font-weight: normal;
+}
+.postForm__content {
+  padding: 0 24px 24px !important;
+}
 
 /*# sourceMappingURL=style.css.map */
