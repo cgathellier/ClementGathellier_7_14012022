@@ -1,5 +1,4 @@
 import React from 'react';
-import classes from './Profile.module.css';
 import { useParams } from 'react-router-dom';
 import { instance as axios } from '../../axios.config';
 import { UserInfosState } from './types';
@@ -30,6 +29,14 @@ const Profile = () => {
     const [showEditMenu, setShowEditMenu] = React.useState(false);
     const [selectedForm, setSelectedForm] = React.useState<string | null>(null);
     const [formShow, setFormShown] = React.useState<JSX.Element>();
+
+    const backdropClasses = showEditMenu
+        ? 'profile__backdrop--hidden profile__backdrop'
+        : 'profile__backdrop--hidden';
+
+    const editProfileMenuClasses = showEditMenu
+        ? 'edit-profile-menu edit-profile-menu--show'
+        : 'edit-profile-menu';
 
     const getUserInfos = React.useCallback(async () => {
         try {
@@ -91,17 +98,17 @@ const Profile = () => {
     };
 
     return (
-        <div className={classes.profile}>
+        <div className="profile">
             {userInfos && (
-                <div className={classes.userInfosContainer}>
-                    <div className={classes.userIconContainer}>
+                <div className="profile__user-infos">
+                    <div className="profile__user-icon">
                         <AccountCircleIcon fontSize="inherit" />
                     </div>
-                    <span className={classes.userName} data-testid="userName">
+                    <span className="profile__user-name" data-testid="userName">
                         {userInfos.firstName} {userInfos.lastName}
                     </span>
                     {userContext?.id === userInfos.id && (
-                        <div className={classes.openEditMenuButtonContainer}>
+                        <div className="profile__open-edit-profile-menu">
                             <Button
                                 onClick={toggleEditMenu}
                                 variant="contained"
@@ -114,7 +121,7 @@ const Profile = () => {
                     )}
                 </div>
             )}
-            <div className={classes.feedContainer}>
+            <div className="profile__feed-container">
                 <Feed
                     posts={posts}
                     profileId={userInfos?.id}
@@ -123,18 +130,8 @@ const Profile = () => {
             </div>
             {userContext?.id === userInfos?.id && (
                 <>
-                    <div
-                        className={
-                            showEditMenu
-                                ? `${classes.backdropHidden} ${classes.backdropShown}`
-                                : `${classes.backdropHidden}`
-                        }
-                    ></div>
-                    <div
-                        className={`${classes.editMenuContainer} ${
-                            showEditMenu && classes.editMenuShown
-                        }`}
-                    >
+                    <div className={backdropClasses}></div>
+                    <div className={editProfileMenuClasses}>
                         {showEditMenu && (
                             <FocusTrap
                                 focusTrapOptions={{
@@ -155,17 +152,11 @@ const Profile = () => {
                                     clickOutsideDeactivates: true,
                                 }}
                             >
-                                <div
-                                    className={classes.editMenuContentContainer}
-                                >
+                                <div className="edit-profile-menu__content">
                                     {selectedForm ? (
                                         <div>{formShow}</div>
                                     ) : (
-                                        <div
-                                            className={
-                                                classes.editMenuButtonsContainer
-                                            }
-                                        >
+                                        <div className="edit-profile-menu__buttons-container">
                                             <Button
                                                 onClick={() =>
                                                     setSelectedForm('infos')
@@ -203,14 +194,10 @@ const Profile = () => {
                                     <Button
                                         onClick={toggleEditMenu}
                                         sx={{ color: '#091f43' }}
-                                        className={
-                                            classes.closeEditMenuIconContainer
-                                        }
+                                        className="edit-profile-menu__icon"
                                         aria-label="Fermer le menu"
                                     >
-                                        <CloseIcon
-                                            className={classes.closeIcon}
-                                        />
+                                        <CloseIcon className="edit-profile-menu__close" />
                                     </Button>
                                 </div>
                             </FocusTrap>
