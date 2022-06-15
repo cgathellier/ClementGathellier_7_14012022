@@ -449,5 +449,54 @@ code {
     transition: all 0.5s ease-in-out;
   }
 }
+@keyframes show-spinner {
+  from {
+    z-index: 200;
+  }
+  to {
+    z-index: 200;
+  }
+}
+@keyframes spinner {
+  to {
+    transform: rotateZ(360deg);
+  }
+}
+.spinner {
+  background: transparent;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.spinner__gradient {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  background: linear-gradient(45deg, #091f43, #1860d4);
+  border-radius: 50%;
+  animation-name: spinner;
+  animation-duration: 1.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.spinner__blocker {
+  width: 45px;
+  height: 45px;
+  border-radius: 50% 50% 50% 30%;
+  background: #dadde1;
+}
+.spinner__round-head {
+  height: 5.8px;
+  width: 6px;
+  position: absolute;
+  bottom: 0;
+  left: 25px;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: -9px -5px 0 7px #dadde1;
+  z-index: 50;
+  transform: rotateZ(-8deg);
+}
 
 /*# sourceMappingURL=style.css.map */

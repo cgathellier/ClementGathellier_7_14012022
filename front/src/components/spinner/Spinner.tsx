@@ -1,15 +1,14 @@
-import React from 'react'
-import classes from './Spinner.module.css'
+import React from 'react';
 
 const Spinner = () => {
-  return (
-    <div className={classes.spinnerContainer}>
-        <div className={classes.spinnerGradient}>
-            <div className={classes.spinnerBlocker}></div>
-            <div className={classes.spinnerRoundHead}></div>
+    return (
+        <div className="spinner">
+            <div className="spinner__gradient">
+                <div className="spinner__blocker"></div>
+                <div className="spinner__round-head"></div>
+            </div>
         </div>
-    </div>
-  )
-}
+    );
+};
 
-export default Spinner
+export default Spinner;
