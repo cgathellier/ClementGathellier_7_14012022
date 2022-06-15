@@ -1,5 +1,4 @@
 import React from 'react';
-import classes from './SignupForm.module.css';
 import { instance as axios } from '../../axios.config';
 import { SignupFormValues } from './types';
 import { useAlertsDispatcher } from '../../contexts/AlertsContext';
@@ -83,10 +82,10 @@ const SignupForm = () => {
     };
 
     return (
-        <div className={classes.frame}>
-            <Paper elevation={3} className={classes.container}>
-                <h2 className={classes.title}>Créer un compte</h2>
-                <form onSubmit={handleSubmit(submit)} className={classes.form}>
+        <div className="auth-form__frame">
+            <Paper elevation={3} className="auth-form__container">
+                <h2 className="auth-form__title">Créer un compte</h2>
+                <form onSubmit={handleSubmit(submit)} className="auth-form">
                     <TextFieldController
                         name="firstName"
                         label="Prénom"
@@ -167,7 +166,7 @@ const SignupForm = () => {
                             render={() => (
                                 <Button
                                     variant="outlined"
-                                    className={classes.submitBtn}
+                                    className="auth-form__submit-button"
                                     type="submit"
                                     disabled={!canSubmit}
                                     data-cy="submit"
@@ -177,11 +176,11 @@ const SignupForm = () => {
                             )}
                         />
                     </FormControl>
-                    <div className={classes.linkContainer}>
+                    <div className="auth-form__links-container">
                         Vous avez déjà un compte ?
                         <Link
                             to="/login"
-                            className={classes.link}
+                            className="auth-form__link"
                             data-cy="toLogin"
                         >
                             Connectez-vous <ChevronRightIcon />

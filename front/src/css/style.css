@@ -499,4 +499,58 @@ code {
   transform: rotateZ(-8deg);
 }
 
+.auth-form {
+  display: flex;
+  flex-direction: column;
+}
+.auth-form__frame {
+  width: 100vw;
+  height: calc(100vh - 80px);
+}
+.auth-form__container {
+  width: 100%;
+  height: 100%;
+  padding: 32px 16px;
+  margin: auto;
+}
+.auth-form__title {
+  display: flex;
+  justify-content: center;
+}
+.auth-form__submit-button {
+  margin-top: 16px !important;
+}
+.auth-form__links-container {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.auth-form__link {
+  margin-left: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.auth-form__link:visited {
+  color: black;
+}
+.auth-form__link:not(:hover) {
+  text-decoration: none;
+}
+
+@media screen and (min-width: 600px) {
+  .auth-form__frame {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .auth-form__container {
+    width: 500px;
+    height: fit-content;
+    margin: auto;
+  }
+}
+
 /*# sourceMappingURL=style.css.map */

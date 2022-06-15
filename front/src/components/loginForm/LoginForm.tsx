@@ -1,5 +1,4 @@
 import React from 'react';
-import classes from '../signupForm/SignupForm.module.css';
 import { instance as axios } from '../../axios.config';
 import { LoginFormValues } from './types';
 import { Link, useNavigate } from 'react-router-dom';
@@ -61,10 +60,10 @@ const LoginForm = () => {
     };
 
     return (
-        <div className={classes.frame}>
-            <Paper elevation={3} className={classes.container}>
-                <h2 className={classes.title}>Se connecter</h2>
-                <form onSubmit={handleSubmit(submit)} className={classes.form}>
+        <div className="auth-form__frame">
+            <Paper elevation={3} className="auth-form__container">
+                <h2 className="auth-form__title">Se connecter</h2>
+                <form onSubmit={handleSubmit(submit)} className="auth-form">
                     <TextFieldController
                         name="email"
                         label="Email"
@@ -110,7 +109,7 @@ const LoginForm = () => {
                             render={() => (
                                 <Button
                                     variant="outlined"
-                                    className={classes.submitBtn}
+                                    className="auth-form__submit-button"
                                     type="submit"
                                     disabled={!canSubmit}
                                     data-cy="submit"
@@ -120,11 +119,11 @@ const LoginForm = () => {
                             )}
                         />
                     </FormControl>
-                    <div className={classes.linkContainer}>
+                    <div className="auth-form__links-container">
                         Vous n'avez pas encore de compte ?
                         <Link
                             to="/signup"
-                            className={classes.link}
+                            className="auth-form__link"
                             data-cy="toSignup"
                         >
                             Inscrivez-vous <ChevronRightIcon />
