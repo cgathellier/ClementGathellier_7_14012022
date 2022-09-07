@@ -1,14 +1,19 @@
 import React from 'react';
-import { instance as axios } from '../../axios.config';
-import { LoginFormValues } from './types';
+import { instance as axios } from '../axios.config';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAlertsDispatcher } from '../../contexts/AlertsContext';
+import { useAlertsDispatcher } from '../contexts/AlertsContext';
 import { useForm, Controller, useWatch } from 'react-hook-form';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import TextFieldController from '../textFieldController/TextFieldController';
+import TextFieldController from './TextFieldController';
+
+export interface LoginFormValues {
+    email: string;
+    password: string;
+    submit?: undefined;
+}
 
 const LoginForm = () => {
     const {

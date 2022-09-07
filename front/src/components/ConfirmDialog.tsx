@@ -1,9 +1,21 @@
 import React from 'react';
-import { ConfirmDialogProps } from './types';
-import { instance as axios } from '../../axios.config';
-import { useAlertsDispatcher } from '../../contexts/AlertsContext';
+import { instance as axios } from '../axios.config';
+import { useAlertsDispatcher } from '../contexts/AlertsContext';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import { UseFormHandleSubmit } from 'react-hook-form';
+import { EditInfosFormValues } from './EditProfileForms';
+
+interface ConfirmDialogProps {
+    open: boolean;
+    handleClose: () => void;
+    title: string;
+    buttonText: string;
+    submit: (model?: EditInfosFormValues) => void;
+    handleSubmit?: UseFormHandleSubmit<EditInfosFormValues>;
+    email: string;
+    setSelectedForm: React.Dispatch<React.SetStateAction<string | null>>;
+}
 
 const ConfirmDialog = (props: ConfirmDialogProps) => {
     const {

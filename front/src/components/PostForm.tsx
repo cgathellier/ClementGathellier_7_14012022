@@ -1,11 +1,15 @@
 import React from 'react';
-import { instance as axios } from '../../axios.config';
-import { PostFormProps } from './types';
-import { useAlertsDispatcher } from '../../contexts/AlertsContext';
+import { instance as axios } from '../axios.config';
+import { useAlertsDispatcher } from '../contexts/AlertsContext';
 import FocusTrap from 'focus-trap-react';
 import Dialog from '@mui/material/Dialog';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+
+interface PostFormProps {
+    open: boolean;
+    handleClose: (shouldRefreshPosts: boolean) => void;
+}
 
 const PostForm = (props: PostFormProps) => {
     const { open, handleClose } = props;

@@ -1,16 +1,37 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CommentProps } from './types';
-import { UserContext } from '../../contexts/UserContext';
-import { useAlertsDispatcher } from '../../contexts/AlertsContext';
-import { instance as axios } from '../../axios.config';
-import getMomentDiff from '../../moment.utils';
+import { UserContext } from '../contexts/UserContext';
+import { useAlertsDispatcher } from '../contexts/AlertsContext';
+import { instance as axios } from '../axios.config';
+import getMomentDiff from '../moment.utils';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import EditTextForm from '../editTextForm/EditTextForm';
+import EditTextForm from './EditTextForm';
+import { AuthorType } from './Post';
+
+interface Likes {
+    userId: number;
+    commentId: number;
+}
+
+export interface CommentType {
+    id: number;
+    author: AuthorType | null;
+    authorId: number;
+    postId: number;
+    createdAt: Date;
+    updatedAt: Date;
+    text: string;
+    likes: Likes[];
+}
+
+interface CommentProps {
+    comment: CommentType;
+    updateFeed: () => void;
+}
 
 const Comment = (props: CommentProps) => {
     const { comment, updateFeed } = props;

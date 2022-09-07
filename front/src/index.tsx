@@ -5,14 +5,12 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { UserContextProvider } from './contexts/UserContext';
 import { AlertsContextProvider } from './contexts/AlertsContext';
-import Spinner from './components/spinner/Spinner';
+import Spinner from './components/Spinner';
 import App from './App';
-const LoginForm = React.lazy(() => import('./components/loginForm/LoginForm'));
-const SignupForm = React.lazy(
-    () => import('./components/signupForm/SignupForm'),
-);
-const Feed = React.lazy(() => import('./components/feed/Feed'));
-const Profile = React.lazy(() => import('./components/profile/Profile'));
+const LoginForm = React.lazy(() => import('./components/LoginForm'));
+const SignupForm = React.lazy(() => import('./components/SignupForm'));
+const Feed = React.lazy(() => import('./components/Feed'));
+const Profile = React.lazy(() => import('./components/Profile'));
 
 ReactDOM.render(
     <UserContextProvider>

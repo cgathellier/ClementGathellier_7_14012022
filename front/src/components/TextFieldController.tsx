@@ -1,9 +1,26 @@
 import React from 'react';
-import { TextFieldControllerProps } from './types';
-import { Controller } from 'react-hook-form';
+import {
+    Controller,
+    Control,
+    UnpackNestedValue,
+    FieldPathValue,
+    FieldValues,
+    FieldPath,
+} from 'react-hook-form';
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
 import FormHelperText from '@mui/material/FormHelperText';
+
+export interface TextFieldControllerProps<T extends FieldValues> {
+    name: FieldPath<T>;
+    label: string;
+    defaultValue: UnpackNestedValue<FieldPathValue<FieldValues, ''>>;
+    helperText?: string;
+    control: Control<T>;
+    rules?: object;
+    type?: string;
+    inputProps?: object;
+}
 
 const muiStyles = {
     textField: {
@@ -15,7 +32,7 @@ const muiStyles = {
     },
 };
 
-const TextFieldController = ({
+const TextFieldController = <T extends FieldValues>({
     name,
     label,
     defaultValue,
@@ -24,7 +41,7 @@ const TextFieldController = ({
     helperText,
     type,
     inputProps,
-}: TextFieldControllerProps) => {
+}: TextFieldControllerProps<T>) => {
     return (
         <Controller
             name={name}

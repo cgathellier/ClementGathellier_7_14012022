@@ -1,14 +1,21 @@
 import React from 'react';
-import { instance as axios } from '../../axios.config';
-import { SignupFormValues } from './types';
-import { useAlertsDispatcher } from '../../contexts/AlertsContext';
+import { instance as axios } from '../axios.config';
+import { useAlertsDispatcher } from '../contexts/AlertsContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm, Controller, useWatch } from 'react-hook-form';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import TextFieldController from '../textFieldController/TextFieldController';
+import TextFieldController from './TextFieldController';
+
+export interface SignupFormValues {
+    email: string;
+    firstName: string;
+    lastName: string;
+    password: string;
+    submit?: undefined;
+}
 
 const SignupForm = () => {
     const {

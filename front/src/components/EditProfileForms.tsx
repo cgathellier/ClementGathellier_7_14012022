@@ -1,17 +1,27 @@
 import React from 'react';
-import {
-    EditProfileFormsProps,
-    EditInfosFormValues,
-    EditPasswordFormValues,
-} from './types';
-import { instance as axios } from '../../axios.config';
-import { UserContext } from '../../contexts/UserContext';
-import { useAlertsDispatcher } from '../../contexts/AlertsContext';
+import { instance as axios } from '../axios.config';
+import { UserContext } from '../contexts/UserContext';
+import { useAlertsDispatcher } from '../contexts/AlertsContext';
 import { useNavigate } from 'react-router-dom';
-import { useForm, useWatch } from 'react-hook-form';
+import { FieldValues, useForm, useWatch } from 'react-hook-form';
 import Button from '@mui/material/Button';
-import TextFieldController from '../textFieldController/TextFieldController';
-import ConfirmDialog from '../confirmDialog/ConfirmDialog';
+import TextFieldController from './TextFieldController';
+import ConfirmDialog from './ConfirmDialog';
+
+interface EditProfileFormsProps {
+    setSelectedForm: React.Dispatch<React.SetStateAction<string | null>>;
+}
+export interface EditInfosFormValues extends FieldValues {
+    email: string;
+    firstName: string;
+    lastName: string;
+}
+
+interface EditPasswordFormValues {
+    password: string;
+    newPassword: string;
+    confirmPassword: string;
+}
 
 export const EditInfos = (props: EditProfileFormsProps) => {
     const { setSelectedForm } = props;

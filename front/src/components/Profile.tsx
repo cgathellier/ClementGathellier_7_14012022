@@ -1,21 +1,22 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { instance as axios } from '../../axios.config';
-import { UserInfosState } from './types';
-import { PostType } from '../post/types';
-import { UserContext } from '../../contexts/UserContext';
-import { useAlertsDispatcher } from '../../contexts/AlertsContext';
+import { instance as axios } from '../axios.config';
+import { PostType } from './Post';
+import { UserContext } from '../contexts/UserContext';
+import { useAlertsDispatcher } from '../contexts/AlertsContext';
 import FocusTrap from 'focus-trap-react';
-import Feed from '../feed/Feed';
+import Feed from './Feed';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Button from '@mui/material/Button';
 import EditIcon from '@mui/icons-material/Edit';
 import CloseIcon from '@mui/icons-material/Close';
-import {
-    EditInfos,
-    EditPassword,
-    DeleteAccount,
-} from '../editProfileForms/EditProfileForms';
+import { EditInfos, EditPassword, DeleteAccount } from './EditProfileForms';
+
+interface UserInfosState {
+    id: number;
+    firstName: string;
+    lastName: string;
+}
 
 const Profile = () => {
     const { userContext } = React.useContext(UserContext);

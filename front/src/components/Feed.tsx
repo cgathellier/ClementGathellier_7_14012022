@@ -1,14 +1,20 @@
 import React from 'react';
-import { instance as axios } from '../../axios.config';
-import { PostType } from '../post/types';
-import { UserContext } from '../../contexts/UserContext';
-import { useAlertsDispatcher } from '../../contexts/AlertsContext';
+import { instance as axios } from '../axios.config';
+import { PostType } from './Post';
+import { UserContext } from '../contexts/UserContext';
+import { useAlertsDispatcher } from '../contexts/AlertsContext';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
-import { FeedProps } from './types';
-import Spinner from '../spinner/Spinner';
-import PostForm from '../postForm/PostForm';
-const Post = React.lazy(() => import('../post/Post'));
+import Spinner from './Spinner';
+import PostForm from './PostForm';
+
+interface FeedProps {
+    posts?: PostType[];
+    profileId?: number;
+    updateProfile?: () => void;
+}
+
+const Post = React.lazy(() => import('./Post'));
 
 const Feed = (props: FeedProps) => {
     const { posts: propsPosts, profileId, updateProfile } = props;

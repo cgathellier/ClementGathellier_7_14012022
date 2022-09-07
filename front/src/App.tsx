@@ -5,7 +5,7 @@ import { UserContext } from './contexts/UserContext';
 import { useAlertsDispatcher } from './contexts/AlertsContext';
 import { instance as axios } from './axios.config';
 import GroupomaniaLogo from './logo/icon-left-font-monochrome-white.svg';
-import CustomizedSnackbars from './components/alerts/Alert';
+import CustomizedSnackbars from './components/Alert';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import Button from '@mui/material/Button';

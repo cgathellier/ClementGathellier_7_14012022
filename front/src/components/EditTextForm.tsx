@@ -1,12 +1,21 @@
 import React from 'react';
-import { EditTextFormProps } from './types';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+
+interface EditTextFormProps {
+    updatedText: string;
+    handleChange: (
+        event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    ) => void;
+    hideUpdate: () => void;
+    submitUpdate: () => Promise<void>;
+    text: string;
+}
 
 const EditTextForm = (props: EditTextFormProps) => {
     const { updatedText, handleChange, hideUpdate, submitUpdate, text } = props;
 
-    const textAreaRef = React.useRef<any>(null);
+    const textAreaRef = React.useRef<HTMLInputElement>(null);
 
     React.useEffect(() => {
         if (textAreaRef && textAreaRef.current) {

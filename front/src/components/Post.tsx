@@ -1,10 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { PostProps } from './types';
-import { UserContext } from '../../contexts/UserContext';
-import { useAlertsDispatcher } from '../../contexts/AlertsContext';
-import { instance as axios } from '../../axios.config';
-import getMomentDiff from '../../moment.utils';
+import { UserContext } from '../contexts/UserContext';
+import { useAlertsDispatcher } from '../contexts/AlertsContext';
+import { instance as axios } from '../axios.config';
+import getMomentDiff from '../moment.utils';
 import Paper from '@mui/material/Paper';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
@@ -14,8 +13,36 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import TextField from '@mui/material/TextField';
-import Comment from '../comment/Comment';
-import EditTextForm from '../editTextForm/EditTextForm';
+import Comment from './Comment';
+import EditTextForm from './EditTextForm';
+import { CommentType } from './Comment';
+
+export interface AuthorType {
+    id: number;
+    firstName: string;
+    lastName: string;
+}
+
+interface Likes {
+    userId: number;
+    postId: number;
+}
+
+export interface PostType {
+    id: number;
+    createdAt: Date;
+    updatedAt: Date;
+    text: string;
+    author: AuthorType;
+    authorId: number;
+    comments: CommentType[];
+    likes: Likes[];
+}
+
+interface PostProps {
+    post: PostType;
+    updateFeed: () => void;
+}
 
 const Post = (props: PostProps) => {
     const { post, updateFeed } = props;

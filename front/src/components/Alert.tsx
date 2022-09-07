@@ -1,5 +1,5 @@
 import React from 'react';
-import { AlertsContext } from '../../contexts/AlertsContext';
+import { AlertsContext } from '../contexts/AlertsContext';
 import { SnackbarCloseReason } from '@mui/material';
 import Snackbar from '@mui/material/Snackbar';
 import MUIAlert, { AlertProps } from '@mui/material/Alert';
