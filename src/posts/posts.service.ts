@@ -12,37 +12,37 @@ export class PostsService {
     constructor(private prisma: PrismaService) {}
 
     async getAllPosts(): Promise<Post[]> {
-        const posts = await this.prisma.post.findMany({
-            orderBy: { createdAt: 'desc' },
-            include: {
-                author: {
-                    select: {
-                        id: true,
-                        firstName: true,
-                        lastName: true,
-                    },
-                },
-                comments: {
-                    orderBy: { createdAt: 'asc' },
-                    include: {
-                        author: {
-                            select: {
-                                id: true,
-                                firstName: true,
-                                lastName: true,
-                            },
+        try {
+            const posts = await this.prisma.post.findMany({
+                orderBy: { createdAt: 'desc' },
+                include: {
+                    author: {
+                        select: {
+                            id: true,
+                            firstName: true,
+                            lastName: true,
                         },
-                        likes: {},
                     },
+                    comments: {
+                        orderBy: { createdAt: 'asc' },
+                        include: {
+                            author: {
+                                select: {
+                                    id: true,
+                                    firstName: true,
+                                    lastName: true,
+                                },
+                            },
+                            likes: {},
+                        },
+                    },
+                    likes: {},
                 },
-                likes: {},
-            },
-        });
+            });
 
-        if (posts.length === 0) {
-            throw new NotFoundException("Aucun post n'a été trouvé...");
-        } else {
             return posts;
+        } catch (error) {
+            throw new InternalServerErrorException(error);
         }
     }
 
